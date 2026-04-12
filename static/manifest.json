@@ -1,6 +1,6 @@
 {
-  "name": "MTA💬",
-  "short_name": "MTA💬",
+  "name": "MTA Widget",
+  "short_name": "MTA Widget",
   "description": "Subway status, at a glance.",
   "start_url": "/",
   "display": "standalone",

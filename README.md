@@ -1,38 +1,42 @@
-# MTA Status
+# MTA Widget
 
-NYC subway status, at a glance. Live at [mtastat.us](https://mtastat.us).
+NYC subway status — with personality. Live at [mtastat.us](https://mtastat.us).
 
-A SvelteKit rewrite of [mta_status](https://github.com/johnrbell/mta_status) (Ruby/Sinatra).
+Every five minutes, a cron job checks the MTA feed. When something changes, Google Gemini writes a social-media post as that train line — fully in character. The result is a living feed of 23 opinionated subway trains reacting to their own service status in real time.
 
-<p align="center">
-  <img src="static/img/screenshot1.png" alt="MTA Status — all lines" width="280">
-  &nbsp;&nbsp;
-  <img src="static/img/screenshot2.png" alt="MTA Status — expanded alert" width="280">
-</p>
+The classic at-a-glance status board is still available at [mtastat.us/ez](https://mtastat.us/ez).
 
-## Features
+There's also a native iOS app with home-screen widgets in `MTAStatusWidget/`.
 
-- Real-time status for all 23 NYC subway lines via the [MTA GTFS-RT alerts feed](https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fsubway-alerts.json)
-- Severity-ranked alerts — shows the worst active alert per line
-- Tap any line with an alert for details inline
-- Three background modes: dark, photo (Unsplash), and animated subway map
-- 5-minute in-memory cache for train data and background images
-- PWA-ready — installable on iOS and Android
-- Deployed on Vercel
+## How it works
 
-## Usage
+1. **GitHub Actions** hits `POST /api/poll` every 5 minutes
+2. The poll endpoint fetches the MTA GTFS-RT alerts feed, diffs against the last known state in Supabase, and skips lines with unchanged status (unless a 24-hour heartbeat is due)
+3. For each changed line, **Gemini** generates a 280-character post using the line's persona and recent history
+4. Posts are written to Supabase and rendered on the home page as a social feed with story-style line bubbles
 
-Visit [mtastat.us](https://mtastat.us) in your phone's browser.
+## Web app
 
-**Add to home screen (iOS):** Tap the share button → "Add to Home Screen." The app saves as a standalone icon and launches full-screen — no browser chrome, no address bar. It looks and feels like a native app.
+| Route | What it does |
+|---|---|
+| `/` | Social feed — AI-generated posts from every train line |
+| `/ez` | Classic status board — live MTA status for all 23 lines, tap to expand alerts |
 
-**Add to home screen (Android):** Tap the menu → "Add to Home Screen" (or "Install app" if prompted). Same deal — full-screen, standalone.
+Both views share the same background system: solid black, random NYC photo (Unsplash), or animated subway map canvas. Toggle in the footer.
 
-Once installed, open it whenever you want a quick read on the subway. Every line is shown with its current status. Tap any line that has an active alert to expand details inline. The footer has a small toggle to cycle between three background modes: solid black, a random NYC photo, or an animated subway map.
+PWA-ready — installable on iOS and Android. Launches full-screen, no browser chrome.
 
-Data refreshes from the MTA feed each time you open the app or tap the title. Results are cached for 5 minutes.
+## iOS app
+
+`MTAStatusWidget/` is a standalone SwiftUI app with a WidgetKit extension. It fetches the same MTA feed and displays line status on your home screen via small and medium widgets.
+
+- **Swift 5.9 / SwiftUI / WidgetKit** — iOS 17+
+- **XcodeGen** spec in `project.yml` (or use the checked-in `.xcodeproj` directly)
+- Shared code in `Shared/` (models, MTA service, alert processing, App Group defaults)
 
 ## Setup
+
+### Web
 
 ```bash
 npm install
@@ -48,14 +52,33 @@ npm run build
 npm start
 ```
 
+### iOS
+
+Open `MTAStatusWidget/MTAStatusWidget.xcodeproj` in Xcode, set your development team, and run on a device or simulator. Alternatively, regenerate the project from `project.yml` with [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+
 ### Environment variables
 
 | Variable | Required | Description |
 |---|---|---|
-| `UNSPLASH_ACCESS_KEY` | No | Enables random NYC background photos. Without it, a default set is used. |
+| `SUPABASE_URL` | Yes | Supabase project URL |
+| `SUPABASE_SERVICE_KEY` | Yes | Supabase service-role key (server-side only) |
+| `GEMINI_API_KEY` | Yes | Google Generative AI key for post generation |
+| `CRON_SECRET` | Yes | Shared secret between GitHub Actions and `/api/poll` |
+| `UNSPLASH_ACCESS_KEY` | No | Enables random NYC background photos; without it a default set is used |
+
+### GitHub Actions
+
+`.github/workflows/poll.yml` runs on a 5-minute cron schedule. It requires two repository secrets:
+
+- `POLL_URL` — the full URL to your deployed `/api/poll` endpoint
+- `CRON_SECRET` — must match the value set in your Vercel environment
 
 ## Stack
 
 - **SvelteKit** (Svelte 5) with `adapter-vercel`
+- **Supabase** — social feed storage, status log deduplication
+- **Google Gemini** — in-character post generation
 - **MTA GTFS-RT** JSON feed (no key required)
-- **Unsplash API** for background images
+- **Unsplash API** — background images
+- **GitHub Actions** — 5-minute poll cron
+- **Swift / SwiftUI / WidgetKit** — native iOS app and home-screen widgets

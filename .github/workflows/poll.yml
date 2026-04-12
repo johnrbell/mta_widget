@@ -1,4 +1,4 @@
-name: Poll MTA Status
+name: Poll MTA Widget
 
 on:
   schedule:

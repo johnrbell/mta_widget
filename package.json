@@ -1,7 +1,7 @@
 {
-  "name": "mta_status_js",
-  "version": "2.0.0",
-  "description": "MTA Subway Status - rebuilt with SvelteKit",
+  "name": "mta_widget",
+  "version": "3.0.0",
+  "description": "MTA Widget — NYC subway status + AI-powered social feed",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnrbell/mta_status_js.git"
+    "url": "git+https://github.com/johnrbell/mta_widget.git"
   },
   "license": "ISC",
   "devDependencies": {

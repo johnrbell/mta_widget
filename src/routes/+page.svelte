@@ -73,12 +73,12 @@
 </script>
 
 <svelte:head>
-	<title>MTA Social</title>
+	<title>MTA Widget</title>
 </svelte:head>
 
 <div class="feed">
 	<div class="feed-header">
-		<a href="/" class="feed-title" data-sveltekit-reload>MTA Social</a>
+		<a href="/" class="feed-title" data-sveltekit-reload>MTA Widget</a>
 		<div class="feed-subtitle">What the trains are saying</div>
 	</div>
 

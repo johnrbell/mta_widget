@@ -52,7 +52,7 @@
 </script>
 
 <svelte:head>
-	<title>MTA Status</title>
+	<title>MTA Widget</title>
 </svelte:head>
 
 <div class="container">

@@ -1,0 +1,64 @@
+import Foundation
+
+actor MTAService {
+    static let shared = MTAService()
+
+    private var cachedResult: TrainStatusResult?
+    private var inFlightTask: Task<TrainStatusResult, Error>?
+    private let cacheTTL: TimeInterval = 300
+
+    func fetchTrainData(bypassCache: Bool = false) async throws -> TrainStatusResult {
+        if !bypassCache, let cached = cachedResult,
+           Date().timeIntervalSince(cached.cacheTime) < cacheTTL {
+            return cached
+        }
+
+        if let existing = inFlightTask {
+            return try await existing.value
+        }
+
+        let task = Task<TrainStatusResult, Error> {
+            defer { inFlightTask = nil }
+
+            var request = URLRequest(url: MTAConstants.mtaURL)
+            request.timeoutInterval = MTAConstants.fetchTimeout
+
+            let (data, response) = try await URLSession.shared.data(for: request)
+
+            guard let http = response as? HTTPURLResponse, http.statusCode == 200 else {
+                throw MTAServiceError.badResponse
+            }
+
+            let feed = try JSONDecoder().decode(MTAFeedResponse.self, from: data)
+            let result = AlertProcessor.processAlerts(feed)
+
+            cachedResult = result
+            SharedDefaults.shared.cachedTrainStatus = result
+
+            return result
+        }
+
+        inFlightTask = task
+        return try await task.value
+    }
+
+    func getCachedOrFetch() async -> TrainStatusResult {
+        if let cached = SharedDefaults.shared.cachedTrainStatus {
+            Task {
+                _ = try? await fetchTrainData(bypassCache: true)
+            }
+            return cached
+        }
+        return (try? await fetchTrainData()) ?? TrainStatusResult(trains: [], cacheTime: Date())
+    }
+}
+
+enum MTAServiceError: LocalizedError {
+    case badResponse
+
+    var errorDescription: String? {
+        switch self {
+        case .badResponse: return "MTA API returned an error"
+        }
+    }
+}

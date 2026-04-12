@@ -1,0 +1,46 @@
+name: MTAStatusWidget
+options:
+  bundleIdPrefix: com.johnrbell
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "15.0"
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    DEVELOPMENT_TEAM: ""
+
+targets:
+  MTAStatusWidget:
+    type: application
+    platform: iOS
+    sources:
+      - path: MTAStatusWidget
+      - path: Shared
+    resources:
+      - path: Assets.xcassets
+    settings:
+      base:
+        INFOPLIST_FILE: MTAStatusWidget/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.johnrbell.MTAStatusWidget
+        CODE_SIGN_ENTITLEMENTS: MTAStatusWidget/MTAStatusWidget.entitlements
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    dependencies:
+      - target: StatusWidgetExtension
+        embed: true
+
+  StatusWidgetExtension:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: StatusWidget
+      - path: Shared
+    resources:
+      - path: Assets.xcassets
+    settings:
+      base:
+        INFOPLIST_FILE: StatusWidget/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.johnrbell.MTAStatusWidget.StatusWidget
+        CODE_SIGN_ENTITLEMENTS: StatusWidget/StatusWidget.entitlements
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
