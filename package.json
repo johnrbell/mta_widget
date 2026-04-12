@@ -1,7 +1,7 @@
 {
   "name": "mta_widget",
   "version": "3.0.0",
-  "description": "MTA Widget — NYC subway status + AI-powered social feed",
+  "description": "MTA Widget — NYC subway status feed",
   "private": true,
   "type": "module",
   "scripts": {
@@ -22,8 +22,5 @@
     "svelte": "^5.28.2",
     "vite": "^6.3.1"
   },
-  "dependencies": {
-    "@google/generative-ai": "^0.24.1",
-    "@supabase/supabase-js": "^2.101.1"
-  }
+  "dependencies": {}
 }
