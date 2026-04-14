@@ -15,13 +15,13 @@ const severityOrder = [
 	'Severe Delays'
 ];
 
-function pickWorstStatus(types) {
-	let worst = types[0];
-	let worstIndex = severityOrder.indexOf(worst);
-	for (const t of types) {
-		const idx = severityOrder.indexOf(t);
+function pickWorst(alerts) {
+	let worst = alerts[0];
+	let worstIndex = severityOrder.indexOf(worst.type);
+	for (const a of alerts) {
+		const idx = severityOrder.indexOf(a.type);
 		if (idx > worstIndex) {
-			worst = t;
+			worst = a;
 			worstIndex = idx;
 		}
 	}
@@ -65,36 +65,22 @@ function mapStatus(status) {
 export const allRoutes = [
 	'1', '2', '3', '4', '5', '6', '7',
 	'A', 'C', 'E', 'B', 'D', 'F', 'M',
-	'G', 'J', 'Z', 'L', 'N', 'Q', 'R', 'W', 'GS'
+	'G', 'J', 'Z', 'L', 'N', 'Q', 'R', 'W',
+	'GS', 'FS', 'H', 'SI'
 ];
 
 const sortOrder = {
 	'1': 0, '2': 1, '3': 2, '4': 3, '5': 4, '6': 5, '7': 6,
 	'A': 7, 'C': 8, 'E': 9, 'B': 10, 'D': 11, 'F': 12, 'M': 13,
-	'G': 14, 'J': 15, 'Z': 16, 'L': 17, 'N': 18, 'Q': 19, 'R': 20, 'W': 21, 'GS': 22
+	'G': 14, 'J': 15, 'Z': 16, 'L': 17, 'N': 18, 'Q': 19, 'R': 20, 'W': 21,
+	'GS': 22, 'FS': 23, 'H': 24, 'SI': 25
 };
 
-function formatPeriods(periods) {
-	if (!periods.length) return null;
-	const sorted = periods
-		.map((p) => ({ start: p.start || 0, end: p.end || null }))
-		.filter((p) => p.start)
-		.sort((a, b) => a.start - b.start);
-	if (!sorted.length) return null;
-
-	const fmt = (ts) => {
-		const d = new Date(ts * 1000);
-		const day = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-		const time = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-		return `${day} ${time}`;
-	};
-
-	const first = sorted[0];
-	const last = sorted[sorted.length - 1];
-	if (last.end) {
-		return `${fmt(first.start)} to ${fmt(last.end)}`;
-	}
-	return `Starting ${fmt(first.start)}`;
+function headerText(alert) {
+	const translations = alert.header_text?.translation;
+	if (!translations) return null;
+	const en = translations.find((t) => t.language === 'en');
+	return (en || translations[0])?.text || null;
 }
 
 export function processAlerts(feedData) {
@@ -124,36 +110,13 @@ export function processAlerts(feedData) {
 
 		if (!isActive && !hasUpcoming) continue;
 
-		let headerText = '';
-		if (alert.header_text && alert.header_text.translation) {
-			const en = alert.header_text.translation.find((t) => t.language === 'en');
-			if (en) headerText = en.text;
-		}
-		const createdAt = mercury.created_at ? new Date(mercury.created_at * 1000) : null;
-
-		let upcomingStart = null;
-		if (!isActive && hasUpcoming) {
-			const futureStarts = periods
-				.map((p) => p.start || 0)
-				.filter((s) => s > now && s <= now + upcomingHorizon);
-			upcomingStart = new Date(Math.min(...futureStarts) * 1000);
-		}
-
-			const periodText = formatPeriods(periods);
+		const detail = headerText(alert);
 
 		for (const ie of alert.informed_entity || []) {
 			if (ie.route_id && allRoutes.includes(ie.route_id)) {
-				const alertObj = {
-					type: alertType,
-					description: headerText,
-					createdAt,
-					upcoming: !isActive && hasUpcoming,
-					upcomingStart,
-					periodText
-				};
 				const bucket = isActive ? activeAlerts : upcomingAlerts;
 				if (!bucket[ie.route_id]) bucket[ie.route_id] = [];
-				bucket[ie.route_id].push(alertObj);
+				bucket[ie.route_id].push({ type: alertType, detail });
 			}
 		}
 	}
@@ -162,49 +125,29 @@ export function processAlerts(feedData) {
 	for (const route of allRoutes) {
 		const active = activeAlerts[route] || [];
 		const upcoming = upcomingAlerts[route] || [];
-		const allAlerts = [...active, ...upcoming];
 
 		let status;
+		let alertType = null;
+		let alertDetail = null;
 		if (active.length > 0) {
-			status = mapStatus(pickWorstStatus(active.map((a) => a.type)));
+			const worst = pickWorst(active);
+			alertType = worst.type;
+			alertDetail = worst.detail;
+			status = mapStatus(alertType);
 		} else if (upcoming.length > 0) {
-			status = mapStatus(pickWorstStatus(upcoming.map((a) => a.type)));
+			const worst = pickWorst(upcoming);
+			alertType = worst.type;
+			alertDetail = worst.detail;
+			status = mapStatus(alertType);
 		} else {
 			status = 'all good.';
 		}
 
-		trains[sortOrder[route]] = { route, statusDetails: { statusSummary: status }, alerts: allAlerts };
+		trains[sortOrder[route]] = { route, status, alertType, alertDetail };
 	}
 
 	return { trains, cacheTime: new Date() };
 }
 
-const MTA_URL =
+export const MTA_URL =
 	'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fsubway-alerts.json';
-const CACHE_TTL = 300;
-
-let cachedData = null;
-
-let inflight = null;
-
-export async function fetchTrainData({ bypassCache = false } = {}) {
-	if (!bypassCache && cachedData && (Date.now() - cachedData.cacheTime.getTime()) / 1000 < CACHE_TTL) {
-		return cachedData;
-	}
-
-	if (inflight) return inflight;
-
-	inflight = (async () => {
-		try {
-			const res = await fetch(MTA_URL, { signal: AbortSignal.timeout(10000) });
-			if (!res.ok) throw new Error('MTA API returned ' + res.status);
-			const json = await res.json();
-			cachedData = processAlerts(json);
-			return cachedData;
-		} finally {
-			inflight = null;
-		}
-	})();
-
-	return inflight;
-}

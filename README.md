@@ -2,7 +2,7 @@
 
 NYC subway status, at a glance. Live at [mtastat.us](https://mtastat.us).
 
-Real-time status for all 23 NYC subway lines via the MTA GTFS-RT alerts feed. Tap any line with an alert to expand details inline.
+Real-time status for all 23 NYC subway lines via the MTA GTFS-RT alerts feed.
 
 There's also a native iOS app with home-screen widgets in `MTAStatusWidget/`.
 
@@ -10,9 +10,7 @@ There's also a native iOS app with home-screen widgets in `MTAStatusWidget/`.
 
 - Real-time status for all 23 NYC subway lines via the [MTA GTFS-RT alerts feed](https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fsubway-alerts.json)
 - Severity-ranked alerts — shows the worst active alert per line
-- Tap any line with an alert for details inline
-- Three background modes: dark, photo (Unsplash), and animated subway map
-- 5-minute in-memory cache for train data and background images
+- 5-minute in-memory cache for train data
 - PWA-ready — installable on iOS and Android
 - Deployed on Vercel
 
@@ -46,15 +44,8 @@ npm start
 
 Open `MTAStatusWidget/MTAStatusWidget.xcodeproj` in Xcode, set your development team, and run on a device or simulator. Alternatively, regenerate the project from `project.yml` with [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 
-### Environment variables
-
-| Variable | Required | Description |
-|---|---|---|
-| `UNSPLASH_ACCESS_KEY` | No | Enables random NYC background photos; without it a default set is used |
-
 ## Stack
 
 - **SvelteKit** (Svelte 5) with `adapter-vercel`
 - **MTA GTFS-RT** JSON feed (no key required)
-- **Unsplash API** — background images
 - **Swift / SwiftUI / WidgetKit** — native iOS app and home-screen widgets

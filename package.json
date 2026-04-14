@@ -22,5 +22,7 @@
     "svelte": "^5.28.2",
     "vite": "^6.3.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@supabase/supabase-js": "^2.103.0"
+  }
 }

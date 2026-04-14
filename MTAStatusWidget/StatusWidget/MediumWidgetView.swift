@@ -55,32 +55,16 @@ struct MediumWidgetView: View {
     }
 
     private func trainRow(_ train: ProcessedTrain) -> some View {
-        let isExpanded = entry.expandedRoutes.contains(train.route)
+        HStack(spacing: 8) {
+            TrainCircleView(route: train.route, size: 32)
 
-        return Button(intent: ToggleStatusIntent(route: train.route)) {
-            HStack(spacing: 8) {
-                TrainCircleView(route: train.route, size: 32)
-
-                VStack(alignment: .leading, spacing: 1) {
-                    Text(train.statusSummary)
-                        .font(.system(size: 13, weight: .bold))
-                        .foregroundStyle(foregroundColor.opacity(0.85))
-                        .lineLimit(1)
-
-                    if isExpanded, let alert = train.alerts.first {
-                        Text(alert.description)
-                            .font(.system(size: 10))
-                            .foregroundStyle(foregroundColor.opacity(0.5))
-                            .lineLimit(2)
-                            .transition(.opacity)
-                    }
-                }
-            }
+            Text(train.statusSummary)
+                .font(.system(size: 13, weight: .bold))
+                .foregroundStyle(foregroundColor.opacity(0.85))
+                .lineLimit(1)
         }
-        .buttonStyle(.plain)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(MTAConstants.displayName(for: train.route)) train, \(train.statusSummary)")
-        .accessibilityHint("Tap to \(isExpanded ? "hide" : "show") alert details")
     }
 
     private func splitIntoRows(_ items: [ProcessedTrain]) -> [[ProcessedTrain]] {

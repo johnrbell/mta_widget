@@ -15,7 +15,7 @@
 </script>
 
 <div class="signage-wrap">
-	<a href="/ez" class="signage-header" onclick={handleLogoClick}>MTA Widget</a>
+	<a href="/" class="signage-header" onclick={handleLogoClick}>MTA Widget</a>
 	<div class="signage-subheader">Subway, at a glance.</div>
 	{@render children()}
 </div>

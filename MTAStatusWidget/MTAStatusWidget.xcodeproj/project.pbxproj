@@ -17,7 +17,6 @@
 		30A84DD5C6FFEE1EBA3FF7E3 /* LineColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68C0F68EF073C43F450F00 /* LineColors.swift */; };
 		31E3144A75E45C1EFABFE1BC /* TrainCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1F373E3C1FFCCFFEE7758 /* TrainCircleView.swift */; };
 		35EE55B6417F31E54491C1DD /* RefreshIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2392463FB0BC7FC93E9450A0 /* RefreshIntent.swift */; };
-		423E4984F84A6F3D8B4F6FEF /* AlertProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9725F1317CB39A3E59AB142B /* AlertProcessor.swift */; };
 		551C8BA6EAD22D2C3AC1B74E /* StatusWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD53C43E4EAAEEFB1DF6F043 /* StatusWidget.swift */; };
 		56EAA6EBF80C0744D723F3F0 /* WidgetBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42FB7561E64F9B7AEDDBB40 /* WidgetBackground.swift */; };
 		5F46502DB257069003610AC2 /* OnboardingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5F59FADA5D3953DE0A8B08 /* OnboardingSheet.swift */; };
@@ -29,17 +28,14 @@
 		8988CB235769BCA8B5E020BC /* LayoutPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17D837ADEC595BA0A24170A /* LayoutPickerView.swift */; };
 		96840B2212362294B317CD8F /* TrainLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B117842AF105AD7CD11083 /* TrainLine.swift */; };
 		988BEB96552ED89EC0FB3DCC /* MTAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09435009DDEF9F26D1FB09AD /* MTAService.swift */; };
-		9B5D2F0C1D2E7C806A0441CA /* MTAFeedModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F5586DF363C50C1F781D6 /* MTAFeedModels.swift */; };
 		9E1D4147D446D6A01CB07F86 /* LineColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68C0F68EF073C43F450F00 /* LineColors.swift */; };
 		A5B2F020D546A07020AA9DF1 /* WidgetPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C6A1165BBA491B7F2485BC /* WidgetPreviewView.swift */; };
 		B98F8A09ABA53334B2394B65 /* TrainCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1F373E3C1FFCCFFEE7758 /* TrainCircleView.swift */; };
 		BA84BF0532B02BEAD67F747F /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F22EFEE887AFC4C22F868E /* ThemePickerView.swift */; };
 		C7C46E0AB81D0B8C8AAAD0D7 /* ProcessedTrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D4150F7B52D2D0FB8A4DE /* ProcessedTrain.swift */; };
-		CAD1A4F22502A7114912B66F /* AlertProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9725F1317CB39A3E59AB142B /* AlertProcessor.swift */; };
 		CBDD24AEB0238EE900F05B2E /* WidgetConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD02CEDB05433B42177D66 /* WidgetConfiguration.swift */; };
 		D09FBED0FBAB6D8865D5320C /* MTAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09435009DDEF9F26D1FB09AD /* MTAService.swift */; };
 		DB1235EBA91601A7E5CAA0D4 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2885E1C7EB93AFB56B2AAB /* SharedDefaults.swift */; };
-		E6258F9C9BDF529D5B8F5580 /* MTAFeedModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F5586DF363C50C1F781D6 /* MTAFeedModels.swift */; };
 		E63FB9E565660CAE8823451F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349E85CB7A28E410699FDAD2 /* ContentView.swift */; };
 		EC5826BAA20FE6C8DF35B528 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2885E1C7EB93AFB56B2AAB /* SharedDefaults.swift */; };
 		FF860553B8B4920227C7BFBA /* MTAStatusWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CFC70A8B38AB3B2CB60740 /* MTAStatusWidgetApp.swift */; };
@@ -80,14 +76,12 @@
 		349E85CB7A28E410699FDAD2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		38F22EFEE887AFC4C22F868E /* ThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerView.swift; sourceTree = "<group>"; };
 		488D8F0063EEAECF11680991 /* MTAStatusWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MTAStatusWidget.entitlements; sourceTree = "<group>"; };
-		530F5586DF363C50C1F781D6 /* MTAFeedModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTAFeedModels.swift; sourceTree = "<group>"; };
 		5A21057F405D1D6DAF05C8E6 /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
 		6F5F59FADA5D3953DE0A8B08 /* OnboardingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSheet.swift; sourceTree = "<group>"; };
 		73C6A1165BBA491B7F2485BC /* WidgetPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetPreviewView.swift; sourceTree = "<group>"; };
 		7C4D2C31CAA32D3A2CB4CE0A /* MTAStatusWidget.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MTAStatusWidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E9D4150F7B52D2D0FB8A4DE /* ProcessedTrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedTrain.swift; sourceTree = "<group>"; };
 		8169FCCFC564D23BE6AE4B50 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		9725F1317CB39A3E59AB142B /* AlertProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProcessor.swift; sourceTree = "<group>"; };
 		A42FB7561E64F9B7AEDDBB40 /* WidgetBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBackground.swift; sourceTree = "<group>"; };
 		A6983F9906B7380B4AD9E79B /* TimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineProvider.swift; sourceTree = "<group>"; };
 		B7448DA74989AB0D5104377B /* StatusWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StatusWidget.entitlements; sourceTree = "<group>"; };
@@ -135,7 +129,6 @@
 		6713D96CC4D04B2B5F02CC87 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				9725F1317CB39A3E59AB142B /* AlertProcessor.swift */,
 				09435009DDEF9F26D1FB09AD /* MTAService.swift */,
 			);
 			path = Services;
@@ -144,7 +137,6 @@
 		8AB81F9942ED447C99F8A486 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				530F5586DF363C50C1F781D6 /* MTAFeedModels.swift */,
 				7E9D4150F7B52D2D0FB8A4DE /* ProcessedTrain.swift */,
 				F8B117842AF105AD7CD11083 /* TrainLine.swift */,
 				22AD02CEDB05433B42177D66 /* WidgetConfiguration.swift */,
@@ -278,12 +270,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				423E4984F84A6F3D8B4F6FEF /* AlertProcessor.swift in Sources */,
 				28228B48A8F62853E9042708 /* Constants.swift in Sources */,
 				E63FB9E565660CAE8823451F /* ContentView.swift in Sources */,
 				8988CB235769BCA8B5E020BC /* LayoutPickerView.swift in Sources */,
 				9E1D4147D446D6A01CB07F86 /* LineColors.swift in Sources */,
-				E6258F9C9BDF529D5B8F5580 /* MTAFeedModels.swift in Sources */,
 				D09FBED0FBAB6D8865D5320C /* MTAService.swift in Sources */,
 				FF860553B8B4920227C7BFBA /* MTAStatusWidgetApp.swift in Sources */,
 				5F46502DB257069003610AC2 /* OnboardingSheet.swift in Sources */,
@@ -302,10 +292,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAD1A4F22502A7114912B66F /* AlertProcessor.swift in Sources */,
 				6B96A0C59A7ADC88CC03AE69 /* Constants.swift in Sources */,
 				30A84DD5C6FFEE1EBA3FF7E3 /* LineColors.swift in Sources */,
-				9B5D2F0C1D2E7C806A0441CA /* MTAFeedModels.swift in Sources */,
 				988BEB96552ED89EC0FB3DCC /* MTAService.swift in Sources */,
 				220B47BFF2E19590A4F7B127 /* MediumWidgetView.swift in Sources */,
 				C7C46E0AB81D0B8C8AAAD0D7 /* ProcessedTrain.swift in Sources */,

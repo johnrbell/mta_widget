@@ -25,7 +25,10 @@ enum LineColors {
         "R": Color(hex: 0xFCCC0A),
         "W": Color(hex: 0xFCCC0A),
         "S": Color(hex: 0x808183),
-        "GS": Color(hex: 0x808183)
+        "GS": Color(hex: 0x808183),
+        "FS": Color(hex: 0x808183),
+        "H": Color(hex: 0x808183),
+        "SI": Color(hex: 0x253B7E)
     ]
 
     static func color(for route: String) -> Color {

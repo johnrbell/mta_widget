@@ -20,7 +20,7 @@ actor MTAService {
         let task = Task<TrainStatusResult, Error> {
             defer { inFlightTask = nil }
 
-            var request = URLRequest(url: MTAConstants.mtaURL)
+            var request = URLRequest(url: MTAConstants.apiURL)
             request.timeoutInterval = MTAConstants.fetchTimeout
 
             let (data, response) = try await URLSession.shared.data(for: request)
@@ -29,8 +29,9 @@ actor MTAService {
                 throw MTAServiceError.badResponse
             }
 
-            let feed = try JSONDecoder().decode(MTAFeedResponse.self, from: data)
-            let result = AlertProcessor.processAlerts(feed)
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let result = try decoder.decode(TrainStatusResult.self, from: data)
 
             cachedResult = result
             SharedDefaults.shared.cachedTrainStatus = result
@@ -58,7 +59,7 @@ enum MTAServiceError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .badResponse: return "MTA API returned an error"
+        case .badResponse: return "API returned an error"
         }
     }
 }

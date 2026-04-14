@@ -66,7 +66,7 @@ struct MTATimelineProvider: TimelineProvider {
 
     private func placeholderTrains() -> [ProcessedTrain] {
         ["1", "A", "G", "L"].map {
-            ProcessedTrain(route: $0, statusSummary: "all good.", alerts: [])
+            ProcessedTrain(route: $0, statusSummary: "all good.")
         }
     }
 }
