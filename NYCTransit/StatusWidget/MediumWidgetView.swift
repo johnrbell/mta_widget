@@ -66,9 +66,9 @@ struct MediumWidgetView: View {
                     }
                 } else {
                     let rows = splitIntoRows(trains)
-                    VStack(spacing: 4) {
+                    VStack(spacing: config.padding) {
                         ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
-                            HStack(spacing: 10) {
+                            HStack(spacing: config.padding + 6) {
                                 ForEach(row) { train in
                                     trainRow(train)
                                 }
@@ -86,8 +86,9 @@ struct MediumWidgetView: View {
                     .foregroundStyle(foregroundColor.opacity(0.4))
             }
             .buttonStyle(.plain)
+            .padding(6)
         }
-        .padding(config.padding)
+        .padding(4)
     }
 
     private func trainRow(_ train: ProcessedTrain) -> some View {

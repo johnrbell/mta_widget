@@ -133,7 +133,7 @@ struct ContentView: View {
             VStack(spacing: 12) {
                 sliderRow(label: "Circle", value: activeConfig.circleSize, range: 20...80, step: 2)
                 sliderRow(label: "Font", value: activeConfig.fontSize, range: 8...16, step: 1)
-                sliderRow(label: "Padding", value: activeConfig.padding, range: 0...16, step: 1)
+                sliderRow(label: "Spacing", value: activeConfig.padding, range: 0...16, step: 1)
             }
         }
     }

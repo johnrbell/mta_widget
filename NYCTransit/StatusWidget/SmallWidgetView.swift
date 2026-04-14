@@ -67,13 +67,14 @@ struct SmallWidgetView: View {
                     .foregroundStyle(foregroundColor.opacity(0.4))
             }
             .buttonStyle(.plain)
+            .padding(6)
         }
-        .padding(config.padding)
+        .padding(4)
     }
 
     private var trainGrid: some View {
         let size = config.circleSize
-        let gap: CGFloat = 4
+        let gap = config.padding
 
         return VStack(spacing: gap) {
             if trains.count <= 2 {

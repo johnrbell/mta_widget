@@ -36,10 +36,11 @@ private struct SmallPreview: View {
                 if trains.isEmpty {
                     VStack(spacing: 4) {
                         Image(systemName: "tram.fill")
-                            .font(.system(size: 20))
+                            .font(.system(size: 24))
                             .foregroundStyle(foregroundColor.opacity(0.4))
-                        Text("Add trains")
-                            .font(.system(size: 9, weight: .medium))
+                        Text("Add trains\nin the app")
+                            .font(.system(size: 11, weight: .medium))
+                            .multilineTextAlignment(.center)
                             .foregroundStyle(foregroundColor.opacity(0.5))
                     }
                 } else {
@@ -49,24 +50,23 @@ private struct SmallPreview: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             Image(systemName: "arrow.clockwise")
-                .font(.system(size: 7, weight: .semibold))
+                .font(.system(size: 9, weight: .semibold))
                 .foregroundStyle(foregroundColor.opacity(0.4))
-                .padding(2)
+                .padding(6)
         }
-        .padding(config.padding)
+        .padding(4)
         .background(backgroundView)
     }
 
     private var trainGrid: some View {
         let size = config.circleSize
-        let gap: CGFloat = 4
-        let showStatus = trains.count <= 2
+        let gap = config.padding
 
         return VStack(spacing: gap) {
             if trains.count <= 2 {
                 HStack(spacing: gap) {
                     ForEach(trains) { train in
-                        previewCell(train, size: size, showStatus: showStatus)
+                        trainCell(train, size: size)
                     }
                 }
             } else {
@@ -74,28 +74,34 @@ private struct SmallPreview: View {
                 let bottom = Array(trains.dropFirst((trains.count + 1) / 2))
                 HStack(spacing: gap) {
                     ForEach(top) { train in
-                        previewCell(train, size: size, showStatus: false)
+                        trainCell(train, size: size)
                     }
                 }
                 HStack(spacing: gap) {
                     ForEach(bottom) { train in
-                        previewCell(train, size: size, showStatus: false)
+                        trainCell(train, size: size)
                     }
                 }
             }
         }
     }
 
-    private func previewCell(_ train: ProcessedTrain, size: CGFloat, showStatus: Bool) -> some View {
+    private func trainCell(_ train: ProcessedTrain, size: CGFloat) -> some View {
         VStack(spacing: 2) {
             TrainCircleView(route: train.route, size: size)
-            if showStatus {
-                Text(train.statusSummary)
-                    .font(.system(size: max(config.fontSize - 2, 7), weight: .bold))
-                    .foregroundStyle(foregroundColor.opacity(0.85))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.6)
-            }
+            Text(train.statusSummary)
+                .font(.system(size: statusFontSize, weight: .bold))
+                .foregroundStyle(foregroundColor.opacity(0.85))
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+        }
+    }
+
+    private var statusFontSize: CGFloat {
+        switch trains.count {
+        case 1: return config.fontSize
+        case 2: return config.fontSize - 1
+        default: return max(config.fontSize - 3, 7)
         }
     }
 
@@ -126,27 +132,21 @@ private struct MediumPreview: View {
         ZStack(alignment: .topTrailing) {
             Group {
                 if trains.isEmpty {
-                    HStack(spacing: 4) {
+                    HStack(spacing: 8) {
                         Image(systemName: "tram.fill")
-                            .font(.system(size: 14))
+                            .font(.system(size: 20))
                             .foregroundStyle(foregroundColor.opacity(0.4))
-                        Text("Add trains in app")
-                            .font(.system(size: 9, weight: .medium))
+                        Text("Add trains in the app to see status here")
+                            .font(.system(size: 13, weight: .medium))
                             .foregroundStyle(foregroundColor.opacity(0.5))
                     }
                 } else {
                     let rows = splitRows(trains)
-                    VStack(spacing: 3) {
+                    VStack(spacing: config.padding) {
                         ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
-                            HStack(spacing: 8) {
+                            HStack(spacing: config.padding + 6) {
                                 ForEach(row) { train in
-                                    HStack(spacing: 4) {
-                                        TrainCircleView(route: train.route, size: config.circleSize * 0.6)
-                                        Text(train.statusSummary)
-                                            .font(.system(size: max(config.fontSize - 2, 7), weight: .bold))
-                                            .foregroundStyle(foregroundColor.opacity(0.85))
-                                            .lineLimit(1)
-                                    }
+                                    trainRow(train)
                                 }
                                 Spacer(minLength: 0)
                             }
@@ -157,12 +157,23 @@ private struct MediumPreview: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             Image(systemName: "arrow.clockwise")
-                .font(.system(size: 6, weight: .semibold))
+                .font(.system(size: 10, weight: .semibold))
                 .foregroundStyle(foregroundColor.opacity(0.4))
-                .padding(2)
+                .padding(6)
         }
-        .padding(config.padding)
+        .padding(4)
         .background(backgroundView)
+    }
+
+    private func trainRow(_ train: ProcessedTrain) -> some View {
+        HStack(spacing: 6) {
+            TrainCircleView(route: train.route, size: config.circleSize)
+            Text(train.statusSummary)
+                .font(.system(size: config.fontSize, weight: .bold))
+                .foregroundStyle(foregroundColor.opacity(0.85))
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+        }
     }
 
     private func splitRows(_ items: [ProcessedTrain]) -> [[ProcessedTrain]] {
