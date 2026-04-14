@@ -1,7 +1,7 @@
 import { json, error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 import { supabase } from '$lib/supabase.js';
-import { processAlerts, MTA_URL } from '$lib/mta.js';
+import { processAlerts, TRANSIT_ALERTS_URL } from '$lib/transit.js';
 
 export async function POST({ request }) {
 	const auth = request.headers.get('authorization');
@@ -9,9 +9,9 @@ export async function POST({ request }) {
 		error(401, 'Unauthorized');
 	}
 
-	const res = await fetch(MTA_URL, { signal: AbortSignal.timeout(10000) });
+	const res = await fetch(TRANSIT_ALERTS_URL, { signal: AbortSignal.timeout(10000) });
 	if (!res.ok) {
-		error(502, `MTA API returned ${res.status}`);
+		error(502, `Transit API returned ${res.status}`);
 	}
 
 	const feedJson = await res.json();

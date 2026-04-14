@@ -35,7 +35,7 @@
 </script>
 
 <svelte:head>
-	<title>MTA Widget</title>
+	<title>NYC Transit</title>
 </svelte:head>
 
 <div class="container">

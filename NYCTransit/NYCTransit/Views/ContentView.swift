@@ -44,7 +44,7 @@ struct ContentView: View {
                 .animation(.easeInOut(duration: 0.25), value: activeConfig.wrappedValue.selectedRoutes)
                 .animation(.easeInOut(duration: 0.25), value: activeConfig.wrappedValue.theme)
             }
-            .navigationTitle("MTA Widget")
+            .navigationTitle("NYC Transit")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -207,7 +207,7 @@ struct ContentView: View {
         defer { isLoading = false }
 
         do {
-            trainStatus = try await MTAService.shared.fetchTrainData(bypassCache: true)
+            trainStatus = try await TransitService.shared.fetchTrainData(bypassCache: true)
             lastRefresh = Date()
         } catch {
             if trainStatus == nil {

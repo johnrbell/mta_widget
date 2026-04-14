@@ -2,7 +2,7 @@ import SwiftUI
 import WidgetKit
 
 struct MediumWidgetView: View {
-    let entry: MTAWidgetEntry
+    let entry: TransitWidgetEntry
 
     private var trains: [ProcessedTrain] { entry.trains }
     private var config: WidgetConfig { entry.config }

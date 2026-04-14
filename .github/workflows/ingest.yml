@@ -1,4 +1,4 @@
-name: MTA Status Ingest
+name: NYC Transit Status Ingest
 
 on:
   schedule:

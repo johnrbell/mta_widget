@@ -6,8 +6,8 @@ final class SharedDefaults {
 
     private let defaults: UserDefaults
 
-    static let smallWidgetKind = "MTASmallWidget"
-    static let mediumWidgetKind = "MTAMediumWidget"
+    static let smallWidgetKind = "TransitSmallWidget"
+    static let mediumWidgetKind = "TransitMediumWidget"
 
     private enum Keys {
         static let legacyWidgetConfig = "widgetConfig"
@@ -18,7 +18,7 @@ final class SharedDefaults {
     }
 
     private init() {
-        defaults = UserDefaults(suiteName: MTAConstants.appGroupID) ?? .standard
+        defaults = UserDefaults(suiteName: TransitConstants.appGroupID) ?? .standard
         migrateIfNeeded()
     }
 

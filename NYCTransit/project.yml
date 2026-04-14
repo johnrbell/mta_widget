@@ -1,4 +1,4 @@
-name: MTAStatusWidget
+name: NYCTransit
 options:
   bundleIdPrefix: com.johnrbell
   deploymentTarget:
@@ -12,19 +12,19 @@ settings:
     DEVELOPMENT_TEAM: ""
 
 targets:
-  MTAStatusWidget:
+  NYCTransit:
     type: application
     platform: iOS
     sources:
-      - path: MTAStatusWidget
+      - path: NYCTransit
       - path: Shared
     resources:
       - path: Assets.xcassets
     settings:
       base:
-        INFOPLIST_FILE: MTAStatusWidget/Info.plist
-        PRODUCT_BUNDLE_IDENTIFIER: com.johnrbell.MTAStatusWidget
-        CODE_SIGN_ENTITLEMENTS: MTAStatusWidget/MTAStatusWidget.entitlements
+        INFOPLIST_FILE: NYCTransit/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.johnrbell.NYCTransit
+        CODE_SIGN_ENTITLEMENTS: NYCTransit/NYCTransit.entitlements
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
     dependencies:
       - target: StatusWidgetExtension
@@ -41,6 +41,6 @@ targets:
     settings:
       base:
         INFOPLIST_FILE: StatusWidget/Info.plist
-        PRODUCT_BUNDLE_IDENTIFIER: com.johnrbell.MTAStatusWidget.StatusWidget
+        PRODUCT_BUNDLE_IDENTIFIER: com.johnrbell.NYCTransit.StatusWidget
         CODE_SIGN_ENTITLEMENTS: StatusWidget/StatusWidget.entitlements
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon

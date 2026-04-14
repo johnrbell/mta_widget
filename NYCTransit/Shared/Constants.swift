@@ -1,6 +1,6 @@
 import Foundation
 
-enum MTAConstants {
+enum TransitConstants {
     static let allRoutes: [String] = [
         "1", "2", "3", "4", "5", "6", "7",
         "A", "C", "E", "B", "D", "F", "M",
@@ -33,7 +33,7 @@ enum MTAConstants {
     static let fetchTimeout: TimeInterval = 10
     static let widgetRefreshInterval: TimeInterval = 15 * 60
 
-    static let appGroupID = "group.com.johnrbell.mtastatus"
+    static let appGroupID = "group.com.johnrbell.nyctransit"
 
     static func displayName(for route: String) -> String {
         switch route {

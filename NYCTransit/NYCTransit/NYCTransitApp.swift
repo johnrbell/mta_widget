@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct MTAStatusWidgetApp: App {
+struct NYCTransitApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

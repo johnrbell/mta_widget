@@ -6,12 +6,12 @@ struct TrainLine: Identifiable, Hashable, Codable {
     var id: String { route }
 
     var displayName: String {
-        MTAConstants.displayName(for: route)
+        TransitConstants.displayName(for: route)
     }
 
     var sortIndex: Int {
-        MTAConstants.sortOrder[route] ?? 99
+        TransitConstants.sortOrder[route] ?? 99
     }
 
-    static let all: [TrainLine] = MTAConstants.allRoutes.map { TrainLine(route: $0) }
+    static let all: [TrainLine] = TransitConstants.allRoutes.map { TrainLine(route: $0) }
 }

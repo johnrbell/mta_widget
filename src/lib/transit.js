@@ -149,5 +149,5 @@ export function processAlerts(feedData) {
 	return { trains, cacheTime: new Date() };
 }
 
-export const MTA_URL =
+export const TRANSIT_ALERTS_URL =
 	'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fsubway-alerts.json';

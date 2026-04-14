@@ -1,7 +1,7 @@
 import Foundation
 
-actor MTAService {
-    static let shared = MTAService()
+actor TransitService {
+    static let shared = TransitService()
 
     private var cachedResult: TrainStatusResult?
     private var inFlightTask: Task<TrainStatusResult, Error>?
@@ -20,13 +20,13 @@ actor MTAService {
         let task = Task<TrainStatusResult, Error> {
             defer { inFlightTask = nil }
 
-            var request = URLRequest(url: MTAConstants.apiURL)
-            request.timeoutInterval = MTAConstants.fetchTimeout
+            var request = URLRequest(url: TransitConstants.apiURL)
+            request.timeoutInterval = TransitConstants.fetchTimeout
 
             let (data, response) = try await URLSession.shared.data(for: request)
 
             guard let http = response as? HTTPURLResponse, http.statusCode == 200 else {
-                throw MTAServiceError.badResponse
+                throw TransitServiceError.badResponse
             }
 
             let decoder = JSONDecoder()
@@ -54,7 +54,7 @@ actor MTAService {
     }
 }
 
-enum MTAServiceError: LocalizedError {
+enum TransitServiceError: LocalizedError {
     case badResponse
 
     var errorDescription: String? {

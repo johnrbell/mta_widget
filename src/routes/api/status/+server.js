@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import { supabase } from '$lib/supabase.js';
-import { allRoutes } from '$lib/mta.js';
+import { allRoutes } from '$lib/transit.js';
 
 export async function GET() {
 	const { data, error } = await supabase

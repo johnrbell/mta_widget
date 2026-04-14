@@ -1,5 +1,5 @@
 import { redirect, error } from '@sveltejs/kit';
-import { allRoutes } from '$lib/mta.js';
+import { allRoutes } from '$lib/transit.js';
 
 export function load({ params }) {
 	const name = params.name.toUpperCase();

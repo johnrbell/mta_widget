@@ -40,6 +40,6 @@ struct TrainCircleView: View {
                     }
                 }
             )
-            .accessibilityLabel("\(MTAConstants.displayName(for: route)) train")
+            .accessibilityLabel("\(TransitConstants.displayName(for: route)) train")
     }
 }

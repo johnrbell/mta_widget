@@ -4,7 +4,7 @@ import SwiftUI
 @main
 struct StatusWidgetBundle: WidgetBundle {
     var body: some Widget {
-        MTASmallWidget()
-        MTAMediumWidget()
+        TransitSmallWidget()
+        TransitMediumWidget()
     }
 }

@@ -1,7 +1,7 @@
 import WidgetKit
 import SwiftUI
 
-struct MTAWidgetEntry: TimelineEntry {
+struct TransitWidgetEntry: TimelineEntry {
     let date: Date
     let config: WidgetConfig
     let trains: [ProcessedTrain]
@@ -10,8 +10,8 @@ struct MTAWidgetEntry: TimelineEntry {
 }
 
 struct SmallTimelineProvider: TimelineProvider {
-    func placeholder(in context: Context) -> MTAWidgetEntry {
-        MTAWidgetEntry(
+    func placeholder(in context: Context) -> TransitWidgetEntry {
+        TransitWidgetEntry(
             date: Date(),
             config: .defaultSmall,
             trains: placeholderTrains(),
@@ -20,30 +20,30 @@ struct SmallTimelineProvider: TimelineProvider {
         )
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (MTAWidgetEntry) -> Void) {
+    func getSnapshot(in context: Context, completion: @escaping (TransitWidgetEntry) -> Void) {
         let config = SharedDefaults.shared.smallWidgetConfig
         let cached = SharedDefaults.shared.cachedTrainStatus
         let focused = SharedDefaults.shared.focusedRoute
         let trains = selectedTrains(from: cached, config: config)
-        completion(MTAWidgetEntry(date: Date(), config: config, trains: trains, focusedRoute: focused, isPlaceholder: false))
+        completion(TransitWidgetEntry(date: Date(), config: config, trains: trains, focusedRoute: focused, isPlaceholder: false))
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<MTAWidgetEntry>) -> Void) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<TransitWidgetEntry>) -> Void) {
         Task {
             let config = SharedDefaults.shared.smallWidgetConfig
             let focused = SharedDefaults.shared.focusedRoute
-            let result = await MTAService.shared.getCachedOrFetch()
+            let result = await TransitService.shared.getCachedOrFetch()
             let trains = selectedTrains(from: result, config: config)
-            let entry = MTAWidgetEntry(date: Date(), config: config, trains: trains, focusedRoute: focused, isPlaceholder: false)
-            let refreshDate = Date().addingTimeInterval(MTAConstants.widgetRefreshInterval)
+            let entry = TransitWidgetEntry(date: Date(), config: config, trains: trains, focusedRoute: focused, isPlaceholder: false)
+            let refreshDate = Date().addingTimeInterval(TransitConstants.widgetRefreshInterval)
             completion(Timeline(entries: [entry], policy: .after(refreshDate)))
         }
     }
 }
 
 struct MediumTimelineProvider: TimelineProvider {
-    func placeholder(in context: Context) -> MTAWidgetEntry {
-        MTAWidgetEntry(
+    func placeholder(in context: Context) -> TransitWidgetEntry {
+        TransitWidgetEntry(
             date: Date(),
             config: .defaultMedium,
             trains: placeholderTrains(),
@@ -52,22 +52,22 @@ struct MediumTimelineProvider: TimelineProvider {
         )
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (MTAWidgetEntry) -> Void) {
+    func getSnapshot(in context: Context, completion: @escaping (TransitWidgetEntry) -> Void) {
         let config = SharedDefaults.shared.mediumWidgetConfig
         let cached = SharedDefaults.shared.cachedTrainStatus
         let focused = SharedDefaults.shared.focusedRoute
         let trains = selectedTrains(from: cached, config: config)
-        completion(MTAWidgetEntry(date: Date(), config: config, trains: trains, focusedRoute: focused, isPlaceholder: false))
+        completion(TransitWidgetEntry(date: Date(), config: config, trains: trains, focusedRoute: focused, isPlaceholder: false))
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<MTAWidgetEntry>) -> Void) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<TransitWidgetEntry>) -> Void) {
         Task {
             let config = SharedDefaults.shared.mediumWidgetConfig
             let focused = SharedDefaults.shared.focusedRoute
-            let result = await MTAService.shared.getCachedOrFetch()
+            let result = await TransitService.shared.getCachedOrFetch()
             let trains = selectedTrains(from: result, config: config)
-            let entry = MTAWidgetEntry(date: Date(), config: config, trains: trains, focusedRoute: focused, isPlaceholder: false)
-            let refreshDate = Date().addingTimeInterval(MTAConstants.widgetRefreshInterval)
+            let entry = TransitWidgetEntry(date: Date(), config: config, trains: trains, focusedRoute: focused, isPlaceholder: false)
+            let refreshDate = Date().addingTimeInterval(TransitConstants.widgetRefreshInterval)
             completion(Timeline(entries: [entry], policy: .after(refreshDate)))
         }
     }

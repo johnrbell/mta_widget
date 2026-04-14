@@ -1,7 +1,7 @@
 {
-  "name": "mta_widget",
+  "name": "nyc_transit",
   "version": "3.0.0",
-  "description": "MTA Widget — NYC subway status feed",
+  "description": "NYC Transit — subway status feed",
   "private": true,
   "type": "module",
   "scripts": {

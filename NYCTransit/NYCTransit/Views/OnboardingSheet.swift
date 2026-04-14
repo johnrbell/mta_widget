@@ -17,7 +17,7 @@ struct OnboardingSheet: View {
                     step(number: 2,
                          icon: "plus.circle.fill",
                          title: "Tap the + button",
-                         detail: "It appears in the top-left corner. Search for \"MTA Widget\".")
+                         detail: "It appears in the top-left corner. Search for \"NYC Transit\".")
 
                     step(number: 3,
                          icon: "rectangle.badge.plus",

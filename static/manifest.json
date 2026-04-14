@@ -1,6 +1,6 @@
 {
-  "name": "MTA Widget",
-  "short_name": "MTA Widget",
+  "name": "NYC Transit",
+  "short_name": "NYC Transit",
   "description": "Subway status, at a glance.",
   "start_url": "/",
   "display": "standalone",

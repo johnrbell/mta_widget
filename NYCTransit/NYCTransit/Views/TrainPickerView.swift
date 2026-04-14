@@ -9,7 +9,7 @@ struct TrainPickerView: View {
 
     var body: some View {
         LazyVGrid(columns: columns, spacing: 10) {
-            ForEach(MTAConstants.allRoutes, id: \.self) { route in
+            ForEach(TransitConstants.allRoutes, id: \.self) { route in
                 trainCell(route)
             }
         }
@@ -43,7 +43,7 @@ struct TrainPickerView: View {
         }
         .buttonStyle(.plain)
         .disabled(isFull)
-        .accessibilityLabel("\(MTAConstants.displayName(for: route)) train\(isSelected ? ", selected" : "")")
+        .accessibilityLabel("\(TransitConstants.displayName(for: route)) train\(isSelected ? ", selected" : "")")
         .accessibilityValue(status?.statusSummary ?? "")
     }
 }
