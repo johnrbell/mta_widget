@@ -88,10 +88,11 @@ private struct SmallPreview: View {
     private func trainCell(_ train: ProcessedTrain, size: CGFloat) -> some View {
         VStack(spacing: 2) {
             TrainCircleView(route: train.route, size: size)
-            Text(train.statusSummary)
+            Text(train.formattedStatus)
                 .font(.system(size: statusFontSize, weight: .bold))
                 .foregroundStyle(foregroundColor.opacity(0.85))
-                .lineLimit(1)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
                 .minimumScaleFactor(0.5)
         }
         .frame(maxWidth: .infinity)
@@ -172,10 +173,11 @@ private struct MediumPreview: View {
     private func trainCell(_ train: ProcessedTrain) -> some View {
         VStack(spacing: 2) {
             TrainCircleView(route: train.route, size: config.circleSize)
-            Text(train.statusSummary)
+            Text(train.formattedStatus)
                 .font(.system(size: max(config.fontSize - 2, 7), weight: .bold))
                 .foregroundStyle(foregroundColor.opacity(0.85))
-                .lineLimit(1)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
                 .minimumScaleFactor(0.5)
         }
         .frame(maxWidth: .infinity)

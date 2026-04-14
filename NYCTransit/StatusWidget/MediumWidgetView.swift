@@ -107,10 +107,11 @@ struct MediumWidgetView: View {
         Button(intent: ToggleStatusIntent(route: train.route)) {
             VStack(spacing: 2) {
                 TrainCircleView(route: train.route, size: config.circleSize)
-                Text(train.statusSummary)
+                Text(train.formattedStatus)
                     .font(.system(size: max(config.fontSize - 2, 7), weight: .bold))
                     .foregroundStyle(foregroundColor.opacity(0.85))
-                    .lineLimit(1)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
                     .minimumScaleFactor(0.5)
             }
             .frame(maxWidth: .infinity)

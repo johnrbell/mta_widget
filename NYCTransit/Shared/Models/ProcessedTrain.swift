@@ -8,6 +8,10 @@ struct ProcessedTrain: Codable, Identifiable {
     var id: String { route }
 
     var isGood: Bool { statusSummary == "all good." }
+
+    var formattedStatus: String {
+        statusSummary.replacingOccurrences(of: " - ", with: " -\n")
+    }
 }
 
 struct TrainStatusResult: Codable {
