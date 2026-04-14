@@ -1,8 +1,11 @@
 import SwiftUI
+import WidgetKit
 
 struct TrainCircleView: View {
     let route: String
     let size: CGFloat
+
+    @Environment(\.widgetRenderingMode) var renderingMode
 
     private var isShuttle: Bool {
         route == "GS" || route == "FS" || route == "H"
@@ -17,29 +20,46 @@ struct TrainCircleView: View {
         }
     }
 
+    @ViewBuilder
+    private var labelContent: some View {
+        if isShuttle {
+            VStack(spacing: 0) {
+                Text("S")
+                    .font(.system(size: size * 0.44, weight: .medium))
+                Text(shuttleSub)
+                    .font(.system(size: size * 0.22, weight: .semibold))
+            }
+            .minimumScaleFactor(0.4)
+        } else {
+            Text(route)
+                .font(.system(size: size * 0.62, weight: .medium))
+                .minimumScaleFactor(0.5)
+        }
+    }
+
     var body: some View {
-        Circle()
-            .fill(LineColors.color(for: route))
-            .frame(width: size, height: size)
-            .overlay(
-                Group {
-                    if isShuttle {
-                        VStack(spacing: 0) {
-                            Text("S")
-                                .font(.system(size: size * 0.44, weight: .medium))
-                            Text(shuttleSub)
-                                .font(.system(size: size * 0.22, weight: .semibold))
-                        }
-                        .foregroundStyle(.white)
-                        .minimumScaleFactor(0.4)
-                    } else {
-                        Text(route)
-                            .font(.system(size: size * 0.62, weight: .medium))
-                            .foregroundStyle(.white)
-                            .minimumScaleFactor(0.5)
-                    }
-                }
-            )
-            .accessibilityLabel("\(TransitConstants.displayName(for: route)) train")
+        Group {
+            if renderingMode == .fullColor {
+                Circle()
+                    .fill(LineColors.color(for: route))
+                    .frame(width: size, height: size)
+                    .overlay(labelContent.foregroundStyle(.white))
+            } else {
+                Circle()
+                    .fill(.primary.opacity(0.3))
+                    .frame(width: size, height: size)
+                    .overlay(
+                        labelContent
+                            .foregroundStyle(.primary)
+                            .blendMode(.destinationOut)
+                    )
+                    .compositingGroup()
+                    .overlay(
+                        Circle()
+                            .strokeBorder(.primary.opacity(0.75), lineWidth: 1)
+                    )
+            }
+        }
+        .accessibilityLabel("\(TransitConstants.displayName(for: route)) train")
     }
 }

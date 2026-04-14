@@ -60,11 +60,10 @@ private struct SmallPreview: View {
 
     private var trainGrid: some View {
         let size = config.circleSize
-        let gap = config.padding
 
-        return VStack(spacing: gap) {
+        return VStack(spacing: 0) {
             if trains.count <= 2 {
-                HStack(spacing: gap) {
+                HStack(spacing: 0) {
                     ForEach(trains) { train in
                         trainCell(train, size: size)
                     }
@@ -72,12 +71,12 @@ private struct SmallPreview: View {
             } else {
                 let top = Array(trains.prefix((trains.count + 1) / 2))
                 let bottom = Array(trains.dropFirst((trains.count + 1) / 2))
-                HStack(spacing: gap) {
+                HStack(spacing: 0) {
                     ForEach(top) { train in
                         trainCell(train, size: size)
                     }
                 }
-                HStack(spacing: gap) {
+                HStack(spacing: 0) {
                     ForEach(bottom) { train in
                         trainCell(train, size: size)
                     }
@@ -95,6 +94,7 @@ private struct SmallPreview: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
         }
+        .frame(maxWidth: .infinity)
     }
 
     private var statusFontSize: CGFloat {
@@ -141,17 +141,7 @@ private struct MediumPreview: View {
                             .foregroundStyle(foregroundColor.opacity(0.5))
                     }
                 } else {
-                    let rows = splitRows(trains)
-                    VStack(spacing: config.padding) {
-                        ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
-                            HStack(spacing: config.padding + 6) {
-                                ForEach(row) { train in
-                                    trainRow(train)
-                                }
-                                Spacer(minLength: 0)
-                            }
-                        }
-                    }
+                    trainGrid
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -165,21 +155,37 @@ private struct MediumPreview: View {
         .background(backgroundView)
     }
 
-    private func trainRow(_ train: ProcessedTrain) -> some View {
-        HStack(spacing: 6) {
-            TrainCircleView(route: train.route, size: config.circleSize)
-            Text(train.statusSummary)
-                .font(.system(size: config.fontSize, weight: .bold))
-                .foregroundStyle(foregroundColor.opacity(0.85))
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
+    private var trainGrid: some View {
+        let gap = config.padding
+        let rows = gridRows(trains, columns: 4)
+
+        return VStack(spacing: gap) {
+            ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
+                HStack(spacing: gap) {
+                    ForEach(row) { train in
+                        trainCell(train)
+                    }
+                }
+            }
         }
     }
 
-    private func splitRows(_ items: [ProcessedTrain]) -> [[ProcessedTrain]] {
-        if items.count <= 3 { return [items] }
-        let mid = (items.count + 1) / 2
-        return [Array(items.prefix(mid)), Array(items.dropFirst(mid))]
+    private func trainCell(_ train: ProcessedTrain) -> some View {
+        VStack(spacing: 2) {
+            TrainCircleView(route: train.route, size: config.circleSize)
+            Text(train.statusSummary)
+                .font(.system(size: max(config.fontSize - 2, 7), weight: .bold))
+                .foregroundStyle(foregroundColor.opacity(0.85))
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private func gridRows(_ items: [ProcessedTrain], columns: Int) -> [[ProcessedTrain]] {
+        stride(from: 0, to: items.count, by: columns).map {
+            Array(items[$0..<min($0 + columns, items.count)])
+        }
     }
 
     @ViewBuilder

@@ -22,30 +22,40 @@ struct SmallWidgetView: View {
     }
 
     private func focusedView(_ train: ProcessedTrain) -> some View {
-        let detail = train.alertDetail?.isEmpty == false ? train.alertDetail! : train.statusSummary
+        let detail = train.alertDetail?.isEmpty == false ? train.alertDetail! : nil
 
         return Button(intent: ToggleStatusIntent(route: train.route)) {
-            VStack(spacing: 4) {
-                HStack(spacing: 6) {
-                    TrainCircleView(route: train.route, size: 24)
-                    Text(train.statusSummary)
-                        .font(.system(size: 12, weight: .heavy))
-                        .foregroundStyle(foregroundColor)
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(spacing: 8) {
+                    TrainCircleView(route: train.route, size: 28)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(TransitConstants.displayName(for: train.route))
+                            .font(.system(size: 9, weight: .medium))
+                            .foregroundStyle(foregroundColor.opacity(0.5))
+                        Text(train.statusSummary)
+                            .font(.system(size: 12, weight: .heavy))
+                            .foregroundStyle(foregroundColor)
+                    }
+                    Spacer(minLength: 0)
                 }
 
-                if detail != train.statusSummary {
-                    Divider().opacity(0.3)
+                if let detail {
                     Text(detail)
-                        .font(.system(size: 10, weight: .regular))
-                        .foregroundStyle(foregroundColor.opacity(0.8))
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundStyle(foregroundColor.opacity(0.7))
+                        .lineSpacing(1)
                         .multilineTextAlignment(.leading)
                         .minimumScaleFactor(0.5)
-                        .lineLimit(8)
+                        .lineLimit(6)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 5)
+                        .background(foregroundColor.opacity(0.06))
+                        .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(max(config.padding, 8))
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .padding(10)
         }
         .buttonStyle(.plain)
     }
@@ -74,11 +84,10 @@ struct SmallWidgetView: View {
 
     private var trainGrid: some View {
         let size = config.circleSize
-        let gap = config.padding
 
-        return VStack(spacing: gap) {
+        return VStack(spacing: 0) {
             if trains.count <= 2 {
-                HStack(spacing: gap) {
+                HStack(spacing: 0) {
                     ForEach(trains) { train in
                         trainCell(train, size: size)
                     }
@@ -86,12 +95,12 @@ struct SmallWidgetView: View {
             } else {
                 let top = Array(trains.prefix((trains.count + 1) / 2))
                 let bottom = Array(trains.dropFirst((trains.count + 1) / 2))
-                HStack(spacing: gap) {
+                HStack(spacing: 0) {
                     ForEach(top) { train in
                         trainCell(train, size: size)
                     }
                 }
-                HStack(spacing: gap) {
+                HStack(spacing: 0) {
                     ForEach(bottom) { train in
                         trainCell(train, size: size)
                     }
@@ -110,6 +119,7 @@ struct SmallWidgetView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
             }
+            .frame(maxWidth: .infinity)
         }
         .buttonStyle(.plain)
     }

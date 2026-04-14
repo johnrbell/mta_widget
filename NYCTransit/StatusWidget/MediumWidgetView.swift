@@ -15,44 +15,52 @@ struct MediumWidgetView: View {
                let train = trains.first(where: { $0.route == focusedRoute }) {
                 focusedView(train)
             } else {
-                listView
+                gridView
             }
         }
         .widgetBackground(theme: theme)
     }
 
-    // MARK: - Focused view
-
     private func focusedView(_ train: ProcessedTrain) -> some View {
-        let detail = train.alertDetail?.isEmpty == false ? train.alertDetail! : train.statusSummary
+        let detail = train.alertDetail?.isEmpty == false ? train.alertDetail! : nil
 
         return Button(intent: ToggleStatusIntent(route: train.route)) {
-            VStack(alignment: .leading, spacing: 4) {
-                HStack(spacing: 6) {
-                    TrainCircleView(route: train.route, size: 24)
-                    Text(train.statusSummary)
-                        .font(.system(size: 13, weight: .heavy))
-                        .foregroundStyle(foregroundColor)
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(spacing: 10) {
+                    TrainCircleView(route: train.route, size: 32)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(TransitConstants.displayName(for: train.route))
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundStyle(foregroundColor.opacity(0.5))
+                        Text(train.statusSummary)
+                            .font(.system(size: 15, weight: .heavy))
+                            .foregroundStyle(foregroundColor)
+                    }
+                    Spacer(minLength: 0)
                 }
 
-                if detail != train.statusSummary {
-                    Divider().opacity(0.3)
+                if let detail {
                     Text(detail)
-                        .font(.system(size: 11, weight: .regular))
-                        .foregroundStyle(foregroundColor.opacity(0.8))
-                        .minimumScaleFactor(0.5)
-                        .lineLimit(8)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(foregroundColor.opacity(0.7))
+                        .lineSpacing(2)
+                        .multilineTextAlignment(.leading)
+                        .minimumScaleFactor(0.6)
+                        .lineLimit(6)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 6)
+                        .background(foregroundColor.opacity(0.06))
+                        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .padding(max(config.padding, 8))
+            .padding(12)
         }
         .buttonStyle(.plain)
     }
 
-    // MARK: - List view
-
-    private var listView: some View {
+    private var gridView: some View {
         ZStack(alignment: .topTrailing) {
             Group {
                 if trains.isEmpty {
@@ -65,17 +73,7 @@ struct MediumWidgetView: View {
                             .foregroundStyle(foregroundColor.opacity(0.5))
                     }
                 } else {
-                    let rows = splitIntoRows(trains)
-                    VStack(spacing: config.padding) {
-                        ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
-                            HStack(spacing: config.padding + 6) {
-                                ForEach(row) { train in
-                                    trainRow(train)
-                                }
-                                Spacer(minLength: 0)
-                            }
-                        }
-                    }
+                    trainGrid
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -91,26 +89,40 @@ struct MediumWidgetView: View {
         .padding(4)
     }
 
-    private func trainRow(_ train: ProcessedTrain) -> some View {
+    private var trainGrid: some View {
+        let gap = config.padding
+        let rows = gridRows(trains, columns: 4)
+
+        return VStack(spacing: gap) {
+            ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
+                HStack(spacing: gap) {
+                    ForEach(row) { train in
+                        trainCell(train)
+                    }
+                }
+            }
+        }
+    }
+
+    private func trainCell(_ train: ProcessedTrain) -> some View {
         Button(intent: ToggleStatusIntent(route: train.route)) {
-            HStack(spacing: 6) {
+            VStack(spacing: 2) {
                 TrainCircleView(route: train.route, size: config.circleSize)
                 Text(train.statusSummary)
-                    .font(.system(size: config.fontSize, weight: .bold))
+                    .font(.system(size: max(config.fontSize - 2, 7), weight: .bold))
                     .foregroundStyle(foregroundColor.opacity(0.85))
                     .lineLimit(1)
-                    .minimumScaleFactor(0.7)
+                    .minimumScaleFactor(0.5)
             }
+            .frame(maxWidth: .infinity)
         }
         .buttonStyle(.plain)
     }
 
-    private func splitIntoRows(_ items: [ProcessedTrain]) -> [[ProcessedTrain]] {
-        if items.count <= 3 {
-            return [items]
+    private func gridRows(_ items: [ProcessedTrain], columns: Int) -> [[ProcessedTrain]] {
+        stride(from: 0, to: items.count, by: columns).map {
+            Array(items[$0..<min($0 + columns, items.count)])
         }
-        let mid = (items.count + 1) / 2
-        return [Array(items.prefix(mid)), Array(items.dropFirst(mid))]
     }
 
     private var foregroundColor: Color {
