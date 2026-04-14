@@ -28,14 +28,9 @@ struct MediumWidgetView: View {
             VStack(alignment: .leading, spacing: 8) {
                 HStack(spacing: 10) {
                     TrainCircleView(route: train.route, size: 32)
-                    VStack(alignment: .leading, spacing: 1) {
-                        Text(TransitConstants.displayName(for: train.route))
-                            .font(.system(size: 11, weight: .medium))
-                            .foregroundStyle(foregroundColor.opacity(0.5))
-                        Text(train.statusSummary)
-                            .font(.system(size: 15, weight: .heavy))
-                            .foregroundStyle(foregroundColor)
-                    }
+                    Text(train.statusSummary)
+                        .font(.system(size: 15, weight: .heavy))
+                        .foregroundStyle(foregroundColor)
                     Spacer(minLength: 0)
                 }
 

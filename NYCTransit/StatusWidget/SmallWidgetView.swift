@@ -28,14 +28,9 @@ struct SmallWidgetView: View {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 8) {
                     TrainCircleView(route: train.route, size: 28)
-                    VStack(alignment: .leading, spacing: 1) {
-                        Text(TransitConstants.displayName(for: train.route))
-                            .font(.system(size: 9, weight: .medium))
-                            .foregroundStyle(foregroundColor.opacity(0.5))
-                        Text(train.statusSummary)
-                            .font(.system(size: 12, weight: .heavy))
-                            .foregroundStyle(foregroundColor)
-                    }
+                    Text(train.statusSummary)
+                        .font(.system(size: 12, weight: .heavy))
+                        .foregroundStyle(foregroundColor)
                     Spacer(minLength: 0)
                 }
 
