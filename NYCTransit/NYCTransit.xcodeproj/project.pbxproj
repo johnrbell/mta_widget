@@ -38,6 +38,8 @@
 		E63FB9E565660CAE8823451F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349E85CB7A28E410699FDAD2 /* ContentView.swift */; };
 		EC5826BAA20FE6C8DF35B528 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2885E1C7EB93AFB56B2AAB /* SharedDefaults.swift */; };
 		FF860553B8B4920227C7BFBA /* NYCTransitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CFC70A8B38AB3B2CB60740 /* NYCTransitApp.swift */; };
+		AA1111111111111111111111 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2222222222222222222222 /* Assets.xcassets */; };
+		AA3333333333333333333333 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2222222222222222222222 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +95,7 @@
 		F8B117842AF105AD7CD11083 /* TrainLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainLine.swift; sourceTree = "<group>"; };
 		FD53C43E4EAAEEFB1DF6F043 /* StatusWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusWidget.swift; sourceTree = "<group>"; };
 		FEF1F373E3C1FFCCFFEE7758 /* TrainCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainCircleView.swift; sourceTree = "<group>"; };
+		AA2222222222222222222222 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -154,6 +157,7 @@
 		9CBC0F5ADCE70F2C75E77E31 = {
 			isa = PBXGroup;
 			children = (
+				AA2222222222222222222222 /* Assets.xcassets */,
 				64F833C54484098962F00E62 /* NYCTransit */,
 				C4CE1995FFA469EC28911361 /* Shared */,
 				379B3F6AB59B52F8BBEF2E81 /* StatusWidget */,
@@ -188,12 +192,32 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXResourcesBuildPhase section */
+		AA4444444444444444444444 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA1111111111111111111111 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA5555555555555555555555 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA3333333333333333333333 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		5C85CFE21B07500ADDEB8A17 /* NYCTransit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4F9C88EC12483BCB062A8AF /* Build configuration list for PBXNativeTarget "NYCTransit" */;
 			buildPhases = (
 				8D14077F98266F76A94C4755 /* Sources */,
+				AA4444444444444444444444 /* Resources */,
 				B5D5BCA8835B5B2A1CEDD0C7 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -213,6 +237,7 @@
 			buildConfigurationList = DDF5342C916830006B5DD979 /* Build configuration list for PBXNativeTarget "StatusWidgetExtension" */;
 			buildPhases = (
 				EC37DA2115297946B0DC67B2 /* Sources */,
+				AA5555555555555555555555 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -387,7 +412,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NYCTransit/NYCTransit.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = NYCTransit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -404,6 +430,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = StatusWidget/StatusWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = StatusWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -478,7 +505,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NYCTransit/NYCTransit.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = NYCTransit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -495,6 +523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = StatusWidget/StatusWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = StatusWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
