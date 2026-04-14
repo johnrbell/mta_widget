@@ -7,7 +7,8 @@ struct RefreshIntent: AppIntent {
 
     func perform() async throws -> some IntentResult {
         _ = try? await MTAService.shared.fetchTrainData(bypassCache: true)
-        WidgetCenter.shared.reloadTimelines(ofKind: "MTAStatusWidget")
+        WidgetCenter.shared.reloadTimelines(ofKind: SharedDefaults.smallWidgetKind)
+        WidgetCenter.shared.reloadTimelines(ofKind: SharedDefaults.mediumWidgetKind)
         return .result()
     }
 }

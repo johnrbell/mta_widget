@@ -4,7 +4,7 @@ import WidgetKit
 struct WidgetPreviewView: View {
     let config: WidgetConfig
     let trainStatus: TrainStatusResult?
-    let family: WidgetFamily
+    let family: WidgetKit.WidgetFamily
 
     private var selectedTrains: [ProcessedTrain] {
         config.selectedRoutes.compactMap { route in
@@ -16,79 +16,82 @@ struct WidgetPreviewView: View {
         Group {
             switch family {
             case .systemSmall:
-                SmallWidgetPreview(
-                    config: config,
-                    trains: selectedTrains
-                )
+                SmallPreview(config: config, trains: selectedTrains)
             case .systemMedium:
-                MediumWidgetPreview(
-                    config: config,
-                    trains: selectedTrains
-                )
+                MediumPreview(config: config, trains: selectedTrains)
             default:
-                SmallWidgetPreview(
-                    config: config,
-                    trains: selectedTrains
-                )
+                SmallPreview(config: config, trains: selectedTrains)
             }
         }
     }
 }
 
-private struct SmallWidgetPreview: View {
+private struct SmallPreview: View {
     let config: WidgetConfig
     let trains: [ProcessedTrain]
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            trainGrid
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            Group {
+                if trains.isEmpty {
+                    VStack(spacing: 4) {
+                        Image(systemName: "tram.fill")
+                            .font(.system(size: 20))
+                            .foregroundStyle(foregroundColor.opacity(0.4))
+                        Text("Add trains")
+                            .font(.system(size: 9, weight: .medium))
+                            .foregroundStyle(foregroundColor.opacity(0.5))
+                    }
+                } else {
+                    trainGrid
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             Image(systemName: "arrow.clockwise")
-                .font(.system(size: 8, weight: .semibold))
-                .foregroundStyle(foregroundColor.opacity(0.5))
-                .padding(6)
+                .font(.system(size: 7, weight: .semibold))
+                .foregroundStyle(foregroundColor.opacity(0.4))
+                .padding(2)
         }
-        .padding(8)
+        .padding(config.padding)
         .background(backgroundView)
     }
 
-    @ViewBuilder
     private var trainGrid: some View {
-        if trains.isEmpty {
-            VStack(spacing: 4) {
-                Image(systemName: "tram.fill")
-                    .font(.system(size: 20))
-                    .foregroundStyle(foregroundColor.opacity(0.4))
-                Text("Add trains")
-                    .font(.system(size: 9, weight: .medium))
-                    .foregroundStyle(foregroundColor.opacity(0.5))
-            }
-        } else {
-            let size: CGFloat = trains.count <= 2 ? 40 : 32
-            VStack(spacing: 4) {
-                HStack(spacing: 8) {
-                    ForEach(trains.prefix(2)) { train in
-                        previewCell(train, size: size)
+        let size = config.circleSize
+        let gap: CGFloat = 4
+        let showStatus = trains.count <= 2
+
+        return VStack(spacing: gap) {
+            if trains.count <= 2 {
+                HStack(spacing: gap) {
+                    ForEach(trains) { train in
+                        previewCell(train, size: size, showStatus: showStatus)
                     }
                 }
-                if trains.count > 2 {
-                    HStack(spacing: 8) {
-                        ForEach(trains.dropFirst(2).prefix(2)) { train in
-                            previewCell(train, size: size)
-                        }
+            } else {
+                let top = Array(trains.prefix((trains.count + 1) / 2))
+                let bottom = Array(trains.dropFirst((trains.count + 1) / 2))
+                HStack(spacing: gap) {
+                    ForEach(top) { train in
+                        previewCell(train, size: size, showStatus: false)
+                    }
+                }
+                HStack(spacing: gap) {
+                    ForEach(bottom) { train in
+                        previewCell(train, size: size, showStatus: false)
                     }
                 }
             }
         }
     }
 
-    private func previewCell(_ train: ProcessedTrain, size: CGFloat) -> some View {
+    private func previewCell(_ train: ProcessedTrain, size: CGFloat, showStatus: Bool) -> some View {
         VStack(spacing: 2) {
             TrainCircleView(route: train.route, size: size)
-            if trains.count <= 2 {
+            if showStatus {
                 Text(train.statusSummary)
-                    .font(.system(size: 8, weight: .bold))
+                    .font(.system(size: max(config.fontSize - 2, 7), weight: .bold))
                     .foregroundStyle(foregroundColor.opacity(0.85))
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
@@ -115,50 +118,57 @@ private struct SmallWidgetPreview: View {
     }
 }
 
-private struct MediumWidgetPreview: View {
+private struct MediumPreview: View {
     let config: WidgetConfig
     let trains: [ProcessedTrain]
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            trainContent
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-            Image(systemName: "arrow.clockwise")
-                .font(.system(size: 7, weight: .semibold))
-                .foregroundStyle(foregroundColor.opacity(0.5))
-                .padding(5)
-        }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 6)
-        .background(backgroundView)
-    }
-
-    @ViewBuilder
-    private var trainContent: some View {
-        if trains.isEmpty {
-            HStack(spacing: 4) {
-                Image(systemName: "tram.fill")
-                    .font(.system(size: 14))
-                    .foregroundStyle(foregroundColor.opacity(0.4))
-                Text("Add trains in app")
-                    .font(.system(size: 9, weight: .medium))
-                    .foregroundStyle(foregroundColor.opacity(0.5))
-            }
-        } else {
-            VStack(spacing: 3) {
-                ForEach(trains) { train in
-                    HStack(spacing: 5) {
-                        TrainCircleView(route: train.route, size: 14)
-                        Text(train.statusSummary)
-                            .font(.system(size: 9, weight: .bold))
-                            .foregroundStyle(foregroundColor.opacity(0.85))
-                            .lineLimit(1)
-                        Spacer()
+            Group {
+                if trains.isEmpty {
+                    HStack(spacing: 4) {
+                        Image(systemName: "tram.fill")
+                            .font(.system(size: 14))
+                            .foregroundStyle(foregroundColor.opacity(0.4))
+                        Text("Add trains in app")
+                            .font(.system(size: 9, weight: .medium))
+                            .foregroundStyle(foregroundColor.opacity(0.5))
+                    }
+                } else {
+                    let rows = splitRows(trains)
+                    VStack(spacing: 3) {
+                        ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
+                            HStack(spacing: 8) {
+                                ForEach(row) { train in
+                                    HStack(spacing: 4) {
+                                        TrainCircleView(route: train.route, size: config.circleSize * 0.6)
+                                        Text(train.statusSummary)
+                                            .font(.system(size: max(config.fontSize - 2, 7), weight: .bold))
+                                            .foregroundStyle(foregroundColor.opacity(0.85))
+                                            .lineLimit(1)
+                                    }
+                                }
+                                Spacer(minLength: 0)
+                            }
+                        }
                     }
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            Image(systemName: "arrow.clockwise")
+                .font(.system(size: 6, weight: .semibold))
+                .foregroundStyle(foregroundColor.opacity(0.4))
+                .padding(2)
         }
+        .padding(config.padding)
+        .background(backgroundView)
+    }
+
+    private func splitRows(_ items: [ProcessedTrain]) -> [[ProcessedTrain]] {
+        if items.count <= 3 { return [items] }
+        let mid = (items.count + 1) / 2
+        return [Array(items.prefix(mid)), Array(items.dropFirst(mid))]
     }
 
     @ViewBuilder

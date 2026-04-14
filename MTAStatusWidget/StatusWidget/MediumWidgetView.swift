@@ -5,70 +5,107 @@ struct MediumWidgetView: View {
     let entry: MTAWidgetEntry
 
     private var trains: [ProcessedTrain] { entry.trains }
-    private var theme: WidgetTheme { entry.config.theme }
+    private var config: WidgetConfig { entry.config }
+    private var theme: WidgetTheme { config.theme }
+    private var focused: String? { entry.focusedRoute }
 
     var body: some View {
-        ZStack(alignment: .topTrailing) {
-            trainList
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-            Button(intent: RefreshIntent()) {
-                Image(systemName: "arrow.clockwise")
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundStyle(foregroundColor.opacity(0.5))
+        Group {
+            if let focusedRoute = focused,
+               let train = trains.first(where: { $0.route == focusedRoute }) {
+                focusedView(train)
+            } else {
+                listView
             }
-            .buttonStyle(.plain)
-            .padding(6)
-            .accessibilityLabel("Refresh status")
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
         .widgetBackground(theme: theme)
     }
 
-    @ViewBuilder
-    private var trainList: some View {
-        if trains.isEmpty {
-            HStack(spacing: 8) {
-                Image(systemName: "tram.fill")
-                    .font(.system(size: 20))
-                    .foregroundStyle(foregroundColor.opacity(0.4))
-                Text("Add trains in the app to see status here")
-                    .font(.system(size: 13, weight: .medium))
-                    .foregroundStyle(foregroundColor.opacity(0.5))
+    // MARK: - Focused view
+
+    private func focusedView(_ train: ProcessedTrain) -> some View {
+        let detail = train.alertDetail?.isEmpty == false ? train.alertDetail! : train.statusSummary
+
+        return Button(intent: ToggleStatusIntent(route: train.route)) {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 6) {
+                    TrainCircleView(route: train.route, size: 24)
+                    Text(train.statusSummary)
+                        .font(.system(size: 13, weight: .heavy))
+                        .foregroundStyle(foregroundColor)
+                }
+
+                if detail != train.statusSummary {
+                    Divider().opacity(0.3)
+                    Text(detail)
+                        .font(.system(size: 11, weight: .regular))
+                        .foregroundStyle(foregroundColor.opacity(0.8))
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(8)
+                }
             }
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel("No trains selected. Open the app to add trains.")
-        } else {
-            let rows = splitIntoRows(trains)
-            VStack(spacing: 6) {
-                ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
-                    HStack(spacing: 16) {
-                        ForEach(row) { train in
-                            trainRow(train)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .padding(max(config.padding, 8))
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: - List view
+
+    private var listView: some View {
+        ZStack(alignment: .topTrailing) {
+            Group {
+                if trains.isEmpty {
+                    HStack(spacing: 8) {
+                        Image(systemName: "tram.fill")
+                            .font(.system(size: 20))
+                            .foregroundStyle(foregroundColor.opacity(0.4))
+                        Text("Add trains in the app to see status here")
+                            .font(.system(size: 13, weight: .medium))
+                            .foregroundStyle(foregroundColor.opacity(0.5))
+                    }
+                } else {
+                    let rows = splitIntoRows(trains)
+                    VStack(spacing: 4) {
+                        ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
+                            HStack(spacing: 10) {
+                                ForEach(row) { train in
+                                    trainRow(train)
+                                }
+                                Spacer(minLength: 0)
+                            }
                         }
-                        Spacer()
                     }
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            Button(intent: RefreshIntent()) {
+                Image(systemName: "arrow.clockwise")
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(foregroundColor.opacity(0.4))
+            }
+            .buttonStyle(.plain)
         }
+        .padding(config.padding)
     }
 
     private func trainRow(_ train: ProcessedTrain) -> some View {
-        HStack(spacing: 8) {
-            TrainCircleView(route: train.route, size: 32)
-
-            Text(train.statusSummary)
-                .font(.system(size: 13, weight: .bold))
-                .foregroundStyle(foregroundColor.opacity(0.85))
-                .lineLimit(1)
+        Button(intent: ToggleStatusIntent(route: train.route)) {
+            HStack(spacing: 6) {
+                TrainCircleView(route: train.route, size: config.circleSize)
+                Text(train.statusSummary)
+                    .font(.system(size: config.fontSize, weight: .bold))
+                    .foregroundStyle(foregroundColor.opacity(0.85))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+            }
         }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(MTAConstants.displayName(for: train.route)) train, \(train.statusSummary)")
+        .buttonStyle(.plain)
     }
 
     private func splitIntoRows(_ items: [ProcessedTrain]) -> [[ProcessedTrain]] {
-        if items.count <= 2 {
+        if items.count <= 3 {
             return [items]
         }
         let mid = (items.count + 1) / 2

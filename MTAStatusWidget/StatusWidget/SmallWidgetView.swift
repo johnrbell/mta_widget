@@ -5,41 +5,119 @@ struct SmallWidgetView: View {
     let entry: MTAWidgetEntry
 
     private var trains: [ProcessedTrain] { entry.trains }
-    private var theme: WidgetTheme { entry.config.theme }
+    private var config: WidgetConfig { entry.config }
+    private var theme: WidgetTheme { config.theme }
+    private var focused: String? { entry.focusedRoute }
 
     var body: some View {
-        ZStack(alignment: .topTrailing) {
-            trainGrid
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-            Button(intent: RefreshIntent()) {
-                Image(systemName: "arrow.clockwise")
-                    .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(foregroundColor.opacity(0.5))
+        Group {
+            if let focusedRoute = focused,
+               let train = trains.first(where: { $0.route == focusedRoute }) {
+                focusedView(train)
+            } else {
+                gridView
             }
-            .buttonStyle(.plain)
-            .padding(4)
-            .accessibilityLabel("Refresh status")
         }
-        .padding(8)
         .widgetBackground(theme: theme)
     }
 
-    @ViewBuilder
-    private var trainGrid: some View {
-        if trains.isEmpty {
-            emptyState
-        } else {
-            switch trains.count {
-            case 1:
-                singleTrain
-            case 2:
-                twoTrains
-            case 3:
-                threeTrains
-            default:
-                fourTrains
+    private func focusedView(_ train: ProcessedTrain) -> some View {
+        let detail = train.alertDetail?.isEmpty == false ? train.alertDetail! : train.statusSummary
+
+        return Button(intent: ToggleStatusIntent(route: train.route)) {
+            VStack(spacing: 4) {
+                HStack(spacing: 6) {
+                    TrainCircleView(route: train.route, size: 24)
+                    Text(train.statusSummary)
+                        .font(.system(size: 12, weight: .heavy))
+                        .foregroundStyle(foregroundColor)
+                }
+
+                if detail != train.statusSummary {
+                    Divider().opacity(0.3)
+                    Text(detail)
+                        .font(.system(size: 10, weight: .regular))
+                        .foregroundStyle(foregroundColor.opacity(0.8))
+                        .multilineTextAlignment(.leading)
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(max(config.padding, 8))
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var gridView: some View {
+        ZStack(alignment: .topTrailing) {
+            Group {
+                if trains.isEmpty {
+                    emptyState
+                } else {
+                    trainGrid
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            Button(intent: RefreshIntent()) {
+                Image(systemName: "arrow.clockwise")
+                    .font(.system(size: 9, weight: .semibold))
+                    .foregroundStyle(foregroundColor.opacity(0.4))
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(config.padding)
+    }
+
+    private var trainGrid: some View {
+        let size = config.circleSize
+        let gap: CGFloat = 4
+
+        return VStack(spacing: gap) {
+            if trains.count <= 2 {
+                HStack(spacing: gap) {
+                    ForEach(trains) { train in
+                        trainCell(train, size: size)
+                    }
+                }
+            } else {
+                let top = Array(trains.prefix((trains.count + 1) / 2))
+                let bottom = Array(trains.dropFirst((trains.count + 1) / 2))
+                HStack(spacing: gap) {
+                    ForEach(top) { train in
+                        trainCell(train, size: size)
+                    }
+                }
+                HStack(spacing: gap) {
+                    ForEach(bottom) { train in
+                        trainCell(train, size: size)
+                    }
+                }
+            }
+        }
+    }
+
+    private func trainCell(_ train: ProcessedTrain, size: CGFloat) -> some View {
+        Button(intent: ToggleStatusIntent(route: train.route)) {
+            VStack(spacing: 2) {
+                TrainCircleView(route: train.route, size: size)
+                Text(train.statusSummary)
+                    .font(.system(size: statusFontSize, weight: .bold))
+                    .foregroundStyle(foregroundColor.opacity(0.85))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+            }
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var statusFontSize: CGFloat {
+        switch trains.count {
+        case 1: return config.fontSize
+        case 2: return config.fontSize - 1
+        default: return max(config.fontSize - 3, 7)
         }
     }
 
@@ -52,77 +130,6 @@ struct SmallWidgetView: View {
                 .font(.system(size: 11, weight: .medium))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(foregroundColor.opacity(0.5))
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("No trains selected. Open the app to add trains.")
-    }
-
-    private var singleTrain: some View {
-        trainCell(trains[0], size: 52)
-    }
-
-    private var twoTrains: some View {
-        HStack(spacing: 12) {
-            ForEach(trains.prefix(2)) { train in
-                trainCell(train, size: 44)
-            }
-        }
-    }
-
-    private var threeTrains: some View {
-        VStack(spacing: 6) {
-            HStack(spacing: 12) {
-                ForEach(trains.prefix(2)) { train in
-                    trainCell(train, size: 38)
-                }
-            }
-            trainCell(trains[2], size: 38)
-        }
-    }
-
-    private var fourTrains: some View {
-        VStack(spacing: 6) {
-            HStack(spacing: 12) {
-                ForEach(trains.prefix(2)) { train in
-                    trainCell(train, size: 36)
-                }
-            }
-            HStack(spacing: 12) {
-                ForEach(trains.dropFirst(2).prefix(2)) { train in
-                    trainCell(train, size: 36)
-                }
-            }
-        }
-    }
-
-    private func trainCell(_ train: ProcessedTrain, size: CGFloat) -> some View {
-        let isExpanded = entry.expandedRoutes.contains(train.route)
-        let showStatus = isExpanded || trains.count <= 2
-
-        return Button(intent: ToggleStatusIntent(route: train.route)) {
-            VStack(spacing: 3) {
-                TrainCircleView(route: train.route, size: size)
-                if showStatus {
-                    Text(train.statusSummary)
-                        .font(.system(size: statusFontSize, weight: .bold))
-                        .foregroundStyle(foregroundColor.opacity(0.85))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.7)
-                        .transition(.opacity.combined(with: .scale(scale: 0.8)))
-                }
-            }
-        }
-        .buttonStyle(.plain)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(MTAConstants.displayName(for: train.route)) train, \(train.statusSummary)")
-        .accessibilityHint(showStatus ? "Tap to hide status" : "Tap to show status")
-    }
-
-    private var statusFontSize: CGFloat {
-        switch trains.count {
-        case 1: return 13
-        case 2: return 11
-        default: return 9
         }
     }
 

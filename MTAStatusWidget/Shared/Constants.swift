@@ -29,7 +29,7 @@ enum MTAConstants {
         ["SI"]
     ]
 
-    static let apiURL = URL(string: "https://mtastat.us/api/status")!
+    static let apiURL = URL(string: "https://iosmtawid.vercel.app/api/status")!
     static let fetchTimeout: TimeInterval = 10
     static let widgetRefreshInterval: TimeInterval = 15 * 60
 
@@ -37,7 +37,9 @@ enum MTAConstants {
 
     static func displayName(for route: String) -> String {
         switch route {
-        case "GS", "FS", "H": return "S"
+        case "GS": return "S·42"
+        case "FS": return "S·Fr"
+        case "H":  return "S·Rk"
         default: return route
         }
     }

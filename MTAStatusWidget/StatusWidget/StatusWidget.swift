@@ -1,31 +1,30 @@
 import WidgetKit
 import SwiftUI
 
-struct MTAStatusWidgetView: View {
-    @Environment(\.widgetFamily) var family
-    let entry: MTAWidgetEntry
+struct MTASmallWidget: Widget {
+    let kind = SharedDefaults.smallWidgetKind
 
-    var body: some View {
-        switch family {
-        case .systemSmall:
-            SmallWidgetView(entry: entry)
-        case .systemMedium:
-            MediumWidgetView(entry: entry)
-        default:
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: SmallTimelineProvider()) { entry in
             SmallWidgetView(entry: entry)
         }
+        .configurationDisplayName("MTA Small")
+        .description("Compact subway status circles.")
+        .supportedFamilies([.systemSmall])
+        .contentMarginsDisabled()
     }
 }
 
-struct MTAStatusWidget: Widget {
-    let kind = "MTAStatusWidget"
+struct MTAMediumWidget: Widget {
+    let kind = SharedDefaults.mediumWidgetKind
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: MTATimelineProvider()) { entry in
-            MTAStatusWidgetView(entry: entry)
+        StaticConfiguration(kind: kind, provider: MediumTimelineProvider()) { entry in
+            MediumWidgetView(entry: entry)
         }
-        .configurationDisplayName("MTA Widget")
-        .description("See the status of your subway lines at a glance.")
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .configurationDisplayName("MTA Medium")
+        .description("Subway status with line details.")
+        .supportedFamilies([.systemMedium])
+        .contentMarginsDisabled()
     }
 }

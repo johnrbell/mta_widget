@@ -18,37 +18,33 @@ enum WidgetTheme: String, Codable, CaseIterable, Identifiable {
     }
 }
 
-enum WidgetLayout: String, Codable, CaseIterable, Identifiable {
-    case grid
-    case row
-    case column
-
-    var id: String { rawValue }
-
-    var displayName: String {
-        switch self {
-        case .grid: return "Grid"
-        case .row: return "Row"
-        case .column: return "Column"
-        }
-    }
-}
-
 struct WidgetConfig: Codable, Equatable {
     var selectedRoutes: [String]
     var theme: WidgetTheme
-    var layout: WidgetLayout
+    var circleSize: Double
+    var fontSize: Double
+    var padding: Double
 
-    static let `default` = WidgetConfig(
+    static let defaultSmall = WidgetConfig(
         selectedRoutes: [],
         theme: .system,
-        layout: .grid
+        circleSize: 36,
+        fontSize: 11,
+        padding: 4
+    )
+
+    static let defaultMedium = WidgetConfig(
+        selectedRoutes: [],
+        theme: .system,
+        circleSize: 28,
+        fontSize: 11,
+        padding: 4
     )
 
     var trainCount: Int { selectedRoutes.count }
 
-    mutating func addRoute(_ route: String) {
-        guard selectedRoutes.count < 4, !selectedRoutes.contains(route) else { return }
+    mutating func addRoute(_ route: String, limit: Int) {
+        guard selectedRoutes.count < limit, !selectedRoutes.contains(route) else { return }
         selectedRoutes.append(route)
     }
 
@@ -56,11 +52,11 @@ struct WidgetConfig: Codable, Equatable {
         selectedRoutes.removeAll { $0 == route }
     }
 
-    mutating func toggleRoute(_ route: String) {
+    mutating func toggleRoute(_ route: String, limit: Int) {
         if selectedRoutes.contains(route) {
             removeRoute(route)
         } else {
-            addRoute(route)
+            addRoute(route, limit: limit)
         }
     }
 

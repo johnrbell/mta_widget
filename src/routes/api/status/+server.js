@@ -5,7 +5,7 @@ import { allRoutes } from '$lib/mta.js';
 export async function GET() {
 	const { data, error } = await supabase
 		.from('ios_widget_train_status')
-		.select('route, status, updated_at')
+		.select('route, status, alert_detail, updated_at')
 		.in('route', allRoutes);
 
 	if (error) {
@@ -20,7 +20,8 @@ export async function GET() {
 	return json({
 		trains: data.map((r) => ({
 			route: r.route,
-			statusSummary: r.status
+			statusSummary: r.status,
+			alertDetail: r.alert_detail ?? ''
 		})),
 		cacheTime: latestUpdate
 	});

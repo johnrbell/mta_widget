@@ -17,7 +17,6 @@ struct ThemePickerView: View {
         return Button {
             withAnimation(.easeInOut(duration: 0.2)) {
                 selectedTheme = theme
-                SharedDefaults.shared.widgetConfig.theme = theme
             }
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
         } label: {

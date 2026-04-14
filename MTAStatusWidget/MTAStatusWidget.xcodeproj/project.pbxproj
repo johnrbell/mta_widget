@@ -25,7 +25,6 @@
 		6B96A0C59A7ADC88CC03AE69 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169FCCFC564D23BE6AE4B50 /* Constants.swift */; };
 		731BD717B4C196DFE288C52D /* ToggleStatusIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5330CC0BDA36D873EE5152 /* ToggleStatusIntent.swift */; };
 		7F801DDE5681B3286DFB1253 /* WidgetConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD02CEDB05433B42177D66 /* WidgetConfiguration.swift */; };
-		8988CB235769BCA8B5E020BC /* LayoutPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17D837ADEC595BA0A24170A /* LayoutPickerView.swift */; };
 		96840B2212362294B317CD8F /* TrainLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B117842AF105AD7CD11083 /* TrainLine.swift */; };
 		988BEB96552ED89EC0FB3DCC /* MTAService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09435009DDEF9F26D1FB09AD /* MTAService.swift */; };
 		9E1D4147D446D6A01CB07F86 /* LineColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68C0F68EF073C43F450F00 /* LineColors.swift */; };
@@ -90,7 +89,6 @@
 		CF5330CC0BDA36D873EE5152 /* ToggleStatusIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleStatusIntent.swift; sourceTree = "<group>"; };
 		DB8394810709A8C43C27AD99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DEE9B8C92D7191E5E5FBC459 /* StatusWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusWidgetBundle.swift; sourceTree = "<group>"; };
-		E17D837ADEC595BA0A24170A /* LayoutPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutPickerView.swift; sourceTree = "<group>"; };
 		EECA05D771B565981A7ECCA4 /* TrainPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainPickerView.swift; sourceTree = "<group>"; };
 		F8B117842AF105AD7CD11083 /* TrainLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainLine.swift; sourceTree = "<group>"; };
 		FD53C43E4EAAEEFB1DF6F043 /* StatusWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusWidget.swift; sourceTree = "<group>"; };
@@ -180,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				349E85CB7A28E410699FDAD2 /* ContentView.swift */,
-				E17D837ADEC595BA0A24170A /* LayoutPickerView.swift */,
 				6F5F59FADA5D3953DE0A8B08 /* OnboardingSheet.swift */,
 				38F22EFEE887AFC4C22F868E /* ThemePickerView.swift */,
 				EECA05D771B565981A7ECCA4 /* TrainPickerView.swift */,
@@ -238,10 +235,10 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					5C85CFE21B07500ADDEB8A17 = {
-						DevelopmentTeam = "";
+						DevelopmentTeam = C89K893TQH;
 					};
 					E809FB75762F3AC876B99711 = {
-						DevelopmentTeam = "";
+						DevelopmentTeam = C89K893TQH;
 					};
 				};
 			};
@@ -272,7 +269,6 @@
 			files = (
 				28228B48A8F62853E9042708 /* Constants.swift in Sources */,
 				E63FB9E565660CAE8823451F /* ContentView.swift in Sources */,
-				8988CB235769BCA8B5E020BC /* LayoutPickerView.swift in Sources */,
 				9E1D4147D446D6A01CB07F86 /* LineColors.swift in Sources */,
 				D09FBED0FBAB6D8865D5320C /* MTAService.swift in Sources */,
 				FF860553B8B4920227C7BFBA /* MTAStatusWidgetApp.swift in Sources */,
@@ -357,7 +353,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = C89K893TQH;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -455,7 +451,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = C89K893TQH;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

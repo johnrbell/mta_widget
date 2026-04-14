@@ -6,28 +6,72 @@ final class SharedDefaults {
 
     private let defaults: UserDefaults
 
+    static let smallWidgetKind = "MTASmallWidget"
+    static let mediumWidgetKind = "MTAMediumWidget"
+
     private enum Keys {
-        static let widgetConfig = "widgetConfig"
+        static let legacyWidgetConfig = "widgetConfig"
+        static let smallWidgetConfig = "smallWidgetConfig"
+        static let mediumWidgetConfig = "mediumWidgetConfig"
         static let cachedTrainStatus = "cachedTrainStatus"
+        static let focusedRoute = "focusedRoute"
     }
 
     private init() {
         defaults = UserDefaults(suiteName: MTAConstants.appGroupID) ?? .standard
+        migrateIfNeeded()
     }
 
-    var widgetConfig: WidgetConfig {
+    private func migrateIfNeeded() {
+        guard let legacyData = defaults.data(forKey: Keys.legacyWidgetConfig) else { return }
+
+        if defaults.data(forKey: Keys.smallWidgetConfig) == nil {
+            defaults.set(legacyData, forKey: Keys.smallWidgetConfig)
+        }
+        if defaults.data(forKey: Keys.mediumWidgetConfig) == nil {
+            defaults.set(legacyData, forKey: Keys.mediumWidgetConfig)
+        }
+        defaults.removeObject(forKey: Keys.legacyWidgetConfig)
+    }
+
+    var smallWidgetConfig: WidgetConfig {
         get {
-            guard let data = defaults.data(forKey: Keys.widgetConfig),
+            guard let data = defaults.data(forKey: Keys.smallWidgetConfig),
                   let config = try? JSONDecoder().decode(WidgetConfig.self, from: data) else {
-                return .default
+                return .defaultSmall
             }
             return config
         }
         set {
             if let data = try? JSONEncoder().encode(newValue) {
-                defaults.set(data, forKey: Keys.widgetConfig)
+                defaults.set(data, forKey: Keys.smallWidgetConfig)
             }
-            WidgetCenter.shared.reloadTimelines(ofKind: "MTAStatusWidget")
+            WidgetCenter.shared.reloadTimelines(ofKind: Self.smallWidgetKind)
+        }
+    }
+
+    var mediumWidgetConfig: WidgetConfig {
+        get {
+            guard let data = defaults.data(forKey: Keys.mediumWidgetConfig),
+                  let config = try? JSONDecoder().decode(WidgetConfig.self, from: data) else {
+                return .defaultMedium
+            }
+            return config
+        }
+        set {
+            if let data = try? JSONEncoder().encode(newValue) {
+                defaults.set(data, forKey: Keys.mediumWidgetConfig)
+            }
+            WidgetCenter.shared.reloadTimelines(ofKind: Self.mediumWidgetKind)
+        }
+    }
+
+    var focusedRoute: String? {
+        get { defaults.string(forKey: Keys.focusedRoute) }
+        set {
+            defaults.set(newValue, forKey: Keys.focusedRoute)
+            WidgetCenter.shared.reloadTimelines(ofKind: Self.smallWidgetKind)
+            WidgetCenter.shared.reloadTimelines(ofKind: Self.mediumWidgetKind)
         }
     }
 

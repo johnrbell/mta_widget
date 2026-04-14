@@ -1,29 +1,48 @@
 import SwiftUI
 import WidgetKit
 
+enum WidgetSizeTab: String, CaseIterable, Identifiable {
+    case small = "Small"
+    case medium = "Medium"
+    var id: String { rawValue }
+}
+
 struct ContentView: View {
-    @State private var config = SharedDefaults.shared.widgetConfig
+    @State private var smallConfig = SharedDefaults.shared.smallWidgetConfig
+    @State private var mediumConfig = SharedDefaults.shared.mediumWidgetConfig
     @State private var trainStatus: TrainStatusResult?
     @State private var isLoading = false
     @State private var showOnboarding = false
     @State private var errorMessage: String?
     @State private var lastRefresh: Date?
+    @State private var selectedFamily: WidgetSizeTab = .small
+
+    private var activeConfig: Binding<WidgetConfig> {
+        switch selectedFamily {
+        case .small: return $smallConfig
+        case .medium: return $mediumConfig
+        }
+    }
+
+    private var routeLimit: Int {
+        selectedFamily == .small ? 4 : 8
+    }
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 24) {
-                    widgetPreviewSection
+                VStack(spacing: 20) {
+                    familyPicker
+                    previewSection
                     trainPickerSection
+                    slidersSection
                     themeSection
-                    layoutSection
                     statusBar
                     addWidgetButton
                 }
                 .padding()
-                .animation(.easeInOut(duration: 0.25), value: config.selectedRoutes)
-                .animation(.easeInOut(duration: 0.25), value: config.theme)
-                .animation(.easeInOut(duration: 0.25), value: config.layout)
+                .animation(.easeInOut(duration: 0.25), value: activeConfig.wrappedValue.selectedRoutes)
+                .animation(.easeInOut(duration: 0.25), value: activeConfig.wrappedValue.theme)
             }
             .navigationTitle("MTA Widget")
             .toolbar {
@@ -32,69 +51,57 @@ struct ContentView: View {
                         Task { await refreshData() }
                     } label: {
                         if isLoading {
-                            ProgressView()
-                                .controlSize(.small)
+                            ProgressView().controlSize(.small)
                         } else {
                             Image(systemName: "arrow.clockwise")
                         }
                     }
                     .disabled(isLoading)
-                    .accessibilityLabel("Refresh train status")
                 }
             }
             .task { await refreshData() }
-            .sheet(isPresented: $showOnboarding) {
-                OnboardingSheet()
+            .sheet(isPresented: $showOnboarding) { OnboardingSheet() }
+            .onChange(of: smallConfig) { _, newValue in
+                SharedDefaults.shared.smallWidgetConfig = newValue
+            }
+            .onChange(of: mediumConfig) { _, newValue in
+                SharedDefaults.shared.mediumWidgetConfig = newValue
             }
         }
     }
 
-    // MARK: - Preview Section
+    // MARK: - Family Picker
 
-    private var widgetPreviewSection: some View {
+    private var familyPicker: some View {
+        Picker("Widget Size", selection: $selectedFamily) {
+            ForEach(WidgetSizeTab.allCases) { family in
+                Text(family.rawValue).tag(family)
+            }
+        }
+        .pickerStyle(.segmented)
+    }
+
+    // MARK: - Preview
+
+    private var previewSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Widget Preview")
+            Text("Preview")
                 .font(.headline)
 
-            HStack(spacing: 16) {
-                smallPreview
-                mediumPreview
+            Group {
+                switch selectedFamily {
+                case .small:
+                    WidgetPreviewView(config: smallConfig, trainStatus: trainStatus, family: .systemSmall)
+                        .frame(width: 170, height: 170)
+                        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+                case .medium:
+                    WidgetPreviewView(config: mediumConfig, trainStatus: trainStatus, family: .systemMedium)
+                        .frame(width: 340, height: 170)
+                        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+                }
             }
+            .shadow(color: .black.opacity(0.12), radius: 8, y: 4)
             .frame(maxWidth: .infinity)
-        }
-    }
-
-    private var smallPreview: some View {
-        VStack(spacing: 6) {
-            WidgetPreviewView(
-                config: config,
-                trainStatus: trainStatus,
-                family: .systemSmall
-            )
-            .frame(width: 155, height: 155)
-            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-            .shadow(color: .black.opacity(0.12), radius: 8, y: 4)
-
-            Text("Small")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        }
-    }
-
-    private var mediumPreview: some View {
-        VStack(spacing: 6) {
-            WidgetPreviewView(
-                config: config,
-                trainStatus: trainStatus,
-                family: .systemMedium
-            )
-            .frame(width: 155, height: 72)
-            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-            .shadow(color: .black.opacity(0.12), radius: 8, y: 4)
-
-            Text("Medium")
-                .font(.caption)
-                .foregroundStyle(.secondary)
         }
     }
 
@@ -106,13 +113,41 @@ struct ContentView: View {
                 Text("Trains")
                     .font(.headline)
                 Spacer()
-                Text("\(config.selectedRoutes.count)/4")
+                Text("\(activeConfig.wrappedValue.trainCount)/\(routeLimit)")
                     .font(.subheadline.monospacedDigit())
                     .foregroundStyle(.secondary)
                     .contentTransition(.numericText())
             }
 
-            TrainPickerView(config: $config, trainStatus: trainStatus)
+            TrainPickerView(config: activeConfig, trainStatus: trainStatus, routeLimit: routeLimit)
+        }
+    }
+
+    // MARK: - Sliders
+
+    private var slidersSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Sizing")
+                .font(.headline)
+
+            VStack(spacing: 12) {
+                sliderRow(label: "Circle", value: activeConfig.circleSize, range: 20...80, step: 2)
+                sliderRow(label: "Font", value: activeConfig.fontSize, range: 8...16, step: 1)
+                sliderRow(label: "Padding", value: activeConfig.padding, range: 0...16, step: 1)
+            }
+        }
+    }
+
+    private func sliderRow(label: String, value: Binding<Double>, range: ClosedRange<Double>, step: Double) -> some View {
+        HStack(spacing: 12) {
+            Text(label)
+                .font(.subheadline)
+                .frame(width: 56, alignment: .leading)
+            Slider(value: value, in: range, step: step)
+            Text("\(Int(value.wrappedValue))")
+                .font(.subheadline.monospacedDigit())
+                .foregroundStyle(.secondary)
+                .frame(width: 28, alignment: .trailing)
         }
     }
 
@@ -122,21 +157,11 @@ struct ContentView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Theme")
                 .font(.headline)
-            ThemePickerView(selectedTheme: $config.theme)
+            ThemePickerView(selectedTheme: activeConfig.theme)
         }
     }
 
-    // MARK: - Layout
-
-    private var layoutSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Layout")
-                .font(.headline)
-            LayoutPickerView(selectedLayout: $config.layout, trainCount: config.trainCount)
-        }
-    }
-
-    // MARK: - Status Bar
+    // MARK: - Status
 
     @ViewBuilder
     private var statusBar: some View {
@@ -157,11 +182,9 @@ struct ContentView: View {
             Text("Updated \(lastRefresh, style: .relative) ago")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
-                .frame(maxWidth: .infinity, alignment: .center)
+                .frame(maxWidth: .infinity)
         }
     }
-
-    // MARK: - Add Widget
 
     private var addWidgetButton: some View {
         Button {
@@ -174,7 +197,6 @@ struct ContentView: View {
         }
         .buttonStyle(.borderedProminent)
         .tint(LineColors.color(for: "A"))
-        .accessibilityHint("Shows instructions for adding the widget to your home screen")
     }
 
     // MARK: - Data

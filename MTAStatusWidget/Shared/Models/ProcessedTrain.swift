@@ -3,6 +3,7 @@ import Foundation
 struct ProcessedTrain: Codable, Identifiable {
     let route: String
     let statusSummary: String
+    let alertDetail: String?
 
     var id: String { route }
 
