@@ -61,9 +61,9 @@ private struct SmallPreview: View {
     private var trainGrid: some View {
         let size = config.circleSize
 
-        return VStack(spacing: 0) {
+        return VStack(spacing: config.vSpacing) {
             if trains.count <= 2 {
-                HStack(spacing: 0) {
+                HStack(spacing: config.hSpacing) {
                     ForEach(trains) { train in
                         trainCell(train, size: size)
                     }
@@ -71,12 +71,12 @@ private struct SmallPreview: View {
             } else {
                 let top = Array(trains.prefix((trains.count + 1) / 2))
                 let bottom = Array(trains.dropFirst((trains.count + 1) / 2))
-                HStack(spacing: 0) {
+                HStack(spacing: config.hSpacing) {
                     ForEach(top) { train in
                         trainCell(train, size: size)
                     }
                 }
-                HStack(spacing: 0) {
+                HStack(spacing: config.hSpacing) {
                     ForEach(bottom) { train in
                         trainCell(train, size: size)
                     }
@@ -156,12 +156,11 @@ private struct MediumPreview: View {
     }
 
     private var trainGrid: some View {
-        let gap = config.padding
         let rows = gridRows(trains, columns: 4)
 
-        return VStack(spacing: gap) {
+        return VStack(spacing: config.vSpacing) {
             ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
-                HStack(spacing: gap) {
+                HStack(spacing: config.hSpacing) {
                     ForEach(row) { train in
                         trainCell(train)
                     }

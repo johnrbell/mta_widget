@@ -90,12 +90,11 @@ struct MediumWidgetView: View {
     }
 
     private var trainGrid: some View {
-        let gap = config.padding
         let rows = gridRows(trains, columns: 4)
 
-        return VStack(spacing: gap) {
+        return VStack(spacing: config.vSpacing) {
             ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
-                HStack(spacing: gap) {
+                HStack(spacing: config.hSpacing) {
                     ForEach(row) { train in
                         trainCell(train)
                     }

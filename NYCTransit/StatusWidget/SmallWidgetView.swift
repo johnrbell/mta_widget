@@ -85,9 +85,9 @@ struct SmallWidgetView: View {
     private var trainGrid: some View {
         let size = config.circleSize
 
-        return VStack(spacing: 0) {
+        return VStack(spacing: config.vSpacing) {
             if trains.count <= 2 {
-                HStack(spacing: 0) {
+                HStack(spacing: config.hSpacing) {
                     ForEach(trains) { train in
                         trainCell(train, size: size)
                     }
@@ -95,12 +95,12 @@ struct SmallWidgetView: View {
             } else {
                 let top = Array(trains.prefix((trains.count + 1) / 2))
                 let bottom = Array(trains.dropFirst((trains.count + 1) / 2))
-                HStack(spacing: 0) {
+                HStack(spacing: config.hSpacing) {
                     ForEach(top) { train in
                         trainCell(train, size: size)
                     }
                 }
-                HStack(spacing: 0) {
+                HStack(spacing: config.hSpacing) {
                     ForEach(bottom) { train in
                         trainCell(train, size: size)
                     }
