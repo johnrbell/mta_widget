@@ -50,20 +50,26 @@ struct SmallWidgetView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .topLeading)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding(.top, 10)
+                .padding(.horizontal, 10)
+                .padding(.bottom, 4)
+                .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
-
-            Spacer(minLength: 2)
+            .buttonStyle(WidgetPressableStyle())
 
             Button(intent: RefreshIntent()) {
                 Text("Refresh All Trains")
                     .font(.system(size: 9, weight: .semibold))
                     .foregroundStyle(foregroundColor.opacity(0.5))
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 10)
+                    .padding(.bottom, 10)
+                    .padding(.top, 4)
+                    .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
+            .buttonStyle(WidgetPressableStyle())
         }
-        .padding(10)
     }
 
     private var gridView: some View {
@@ -117,8 +123,9 @@ struct SmallWidgetView: View {
                     .minimumScaleFactor(0.5)
             }
             .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(WidgetPressableStyle())
     }
 
     private var statusFontSize: CGFloat {

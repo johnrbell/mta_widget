@@ -50,20 +50,26 @@ struct MediumWidgetView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .topLeading)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding(.top, 12)
+                .padding(.horizontal, 12)
+                .padding(.bottom, 4)
+                .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
-
-            Spacer(minLength: 2)
+            .buttonStyle(WidgetPressableStyle())
 
             Button(intent: RefreshIntent()) {
                 Text("Refresh All Trains")
                     .font(.system(size: 10, weight: .semibold))
                     .foregroundStyle(foregroundColor.opacity(0.5))
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 12)
+                    .padding(.bottom, 12)
+                    .padding(.top, 4)
+                    .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
+            .buttonStyle(WidgetPressableStyle())
         }
-        .padding(12)
     }
 
     private var gridView: some View {
@@ -111,8 +117,9 @@ struct MediumWidgetView: View {
                     .minimumScaleFactor(0.5)
             }
             .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(WidgetPressableStyle())
     }
 
     private func gridRows(_ items: [ProcessedTrain], columns: Int) -> [[ProcessedTrain]] {
