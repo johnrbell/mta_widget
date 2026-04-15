@@ -15,6 +15,8 @@ final class SharedDefaults {
         static let mediumWidgetConfig = "mediumWidgetConfig"
         static let cachedTrainStatus = "cachedTrainStatus"
         static let focusedRoute = "focusedRoute"
+        static let focusedRouteExpiry = "focusedRouteExpiry"
+        static let lastWidgetRefresh = "lastWidgetRefresh"
     }
 
     private init() {
@@ -73,6 +75,16 @@ final class SharedDefaults {
             WidgetCenter.shared.reloadTimelines(ofKind: Self.smallWidgetKind)
             WidgetCenter.shared.reloadTimelines(ofKind: Self.mediumWidgetKind)
         }
+    }
+
+    var focusedRouteExpiry: Date? {
+        get { defaults.object(forKey: Keys.focusedRouteExpiry) as? Date }
+        set { defaults.set(newValue, forKey: Keys.focusedRouteExpiry) }
+    }
+
+    var lastWidgetRefresh: Date? {
+        get { defaults.object(forKey: Keys.lastWidgetRefresh) as? Date }
+        set { defaults.set(newValue, forKey: Keys.lastWidgetRefresh) }
     }
 
     var cachedTrainStatus: TrainStatusResult? {

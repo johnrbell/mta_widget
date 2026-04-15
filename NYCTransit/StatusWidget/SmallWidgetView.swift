@@ -24,56 +24,57 @@ struct SmallWidgetView: View {
     private func focusedView(_ train: ProcessedTrain) -> some View {
         let detail = train.alertDetail?.isEmpty == false ? train.alertDetail! : nil
 
-        return Button(intent: ToggleStatusIntent(route: train.route)) {
-            VStack(alignment: .leading, spacing: 6) {
-                HStack(spacing: 8) {
-                    TrainCircleView(route: train.route, size: 28)
-                    Text(train.statusSummary)
-                        .font(.system(size: 12, weight: .heavy))
-                        .foregroundStyle(foregroundColor)
-                    Spacer(minLength: 0)
-                }
+        return VStack(spacing: 0) {
+            Button(intent: ToggleStatusIntent(route: train.route)) {
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack(spacing: 8) {
+                        TrainCircleView(route: train.route, size: 28, iconOverride: config.iconOverride)
+                        Text(train.statusSummary)
+                            .font(.system(size: 12, weight: .heavy))
+                            .foregroundStyle(foregroundColor)
+                        Spacer(minLength: 0)
+                    }
 
-                if let detail {
-                    Text(detail)
-                        .font(.system(size: 10, weight: .medium))
-                        .foregroundStyle(foregroundColor.opacity(0.7))
-                        .lineSpacing(1)
-                        .multilineTextAlignment(.leading)
-                        .minimumScaleFactor(0.5)
-                        .lineLimit(6)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 5)
-                        .background(foregroundColor.opacity(0.06))
-                        .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                    if let detail {
+                        Text(detail)
+                            .font(.system(size: 10, weight: .medium))
+                            .foregroundStyle(foregroundColor.opacity(0.7))
+                            .lineSpacing(1)
+                            .multilineTextAlignment(.leading)
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(4)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 5)
+                            .background(foregroundColor.opacity(0.06))
+                            .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                    }
                 }
+                .frame(maxWidth: .infinity, alignment: .topLeading)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .padding(10)
+            .buttonStyle(.plain)
+
+            Spacer(minLength: 2)
+
+            Button(intent: RefreshIntent()) {
+                Text("Refresh All Trains")
+                    .font(.system(size: 9, weight: .semibold))
+                    .foregroundStyle(foregroundColor.opacity(0.5))
+            }
+            .buttonStyle(.plain)
         }
-        .buttonStyle(.plain)
+        .padding(10)
     }
 
     private var gridView: some View {
-        ZStack(alignment: .topTrailing) {
-            Group {
-                if trains.isEmpty {
-                    emptyState
-                } else {
-                    trainGrid
-                }
+        Group {
+            if trains.isEmpty {
+                emptyState
+            } else {
+                trainGrid
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-            Button(intent: RefreshIntent()) {
-                Image(systemName: "arrow.clockwise")
-                    .font(.system(size: 9, weight: .semibold))
-                    .foregroundStyle(foregroundColor.opacity(0.4))
-            }
-            .buttonStyle(.plain)
-            .padding(6)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(4)
     }
 
@@ -82,7 +83,7 @@ struct SmallWidgetView: View {
 
         return VStack(spacing: config.vSpacing) {
             if trains.count <= 2 {
-                HStack(spacing: config.hSpacing) {
+                HStack(alignment: .top, spacing: config.hSpacing) {
                     ForEach(trains) { train in
                         trainCell(train, size: size)
                     }
@@ -90,12 +91,12 @@ struct SmallWidgetView: View {
             } else {
                 let top = Array(trains.prefix((trains.count + 1) / 2))
                 let bottom = Array(trains.dropFirst((trains.count + 1) / 2))
-                HStack(spacing: config.hSpacing) {
+                HStack(alignment: .top, spacing: config.hSpacing) {
                     ForEach(top) { train in
                         trainCell(train, size: size)
                     }
                 }
-                HStack(spacing: config.hSpacing) {
+                HStack(alignment: .top, spacing: config.hSpacing) {
                     ForEach(bottom) { train in
                         trainCell(train, size: size)
                     }
@@ -107,7 +108,7 @@ struct SmallWidgetView: View {
     private func trainCell(_ train: ProcessedTrain, size: CGFloat) -> some View {
         Button(intent: ToggleStatusIntent(route: train.route)) {
             VStack(spacing: 2) {
-                TrainCircleView(route: train.route, size: size)
+                TrainCircleView(route: train.route, size: size, iconOverride: config.iconOverride)
                 Text(train.formattedStatus)
                     .font(.system(size: statusFontSize, weight: .bold))
                     .foregroundStyle(foregroundColor.opacity(0.85))

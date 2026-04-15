@@ -31,12 +31,11 @@ struct SmallTimelineProvider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<TransitWidgetEntry>) -> Void) {
         Task {
             let config = SharedDefaults.shared.smallWidgetConfig
-            let focused = SharedDefaults.shared.focusedRoute
             let result = await TransitService.shared.getCachedOrFetch()
             let trains = selectedTrains(from: result, config: config)
-            let entry = TransitWidgetEntry(date: Date(), config: config, trains: trains, focusedRoute: focused, isPlaceholder: false)
+            let entries = buildEntries(config: config, trains: trains)
             let refreshDate = Date().addingTimeInterval(TransitConstants.widgetRefreshInterval)
-            completion(Timeline(entries: [entry], policy: .after(refreshDate)))
+            completion(Timeline(entries: entries, policy: .after(refreshDate)))
         }
     }
 }
@@ -63,13 +62,32 @@ struct MediumTimelineProvider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<TransitWidgetEntry>) -> Void) {
         Task {
             let config = SharedDefaults.shared.mediumWidgetConfig
-            let focused = SharedDefaults.shared.focusedRoute
             let result = await TransitService.shared.getCachedOrFetch()
             let trains = selectedTrains(from: result, config: config)
-            let entry = TransitWidgetEntry(date: Date(), config: config, trains: trains, focusedRoute: focused, isPlaceholder: false)
+            let entries = buildEntries(config: config, trains: trains)
             let refreshDate = Date().addingTimeInterval(TransitConstants.widgetRefreshInterval)
-            completion(Timeline(entries: [entry], policy: .after(refreshDate)))
+            completion(Timeline(entries: entries, policy: .after(refreshDate)))
         }
+    }
+}
+
+private func buildEntries(config: WidgetConfig, trains: [ProcessedTrain]) -> [TransitWidgetEntry] {
+    let focused = SharedDefaults.shared.focusedRoute
+    let expiry = SharedDefaults.shared.focusedRouteExpiry
+
+    if let focused, let expiry, Date() < expiry {
+        return [
+            TransitWidgetEntry(date: Date(), config: config, trains: trains, focusedRoute: focused, isPlaceholder: false),
+            TransitWidgetEntry(date: expiry, config: config, trains: trains, focusedRoute: nil, isPlaceholder: false)
+        ]
+    } else {
+        if SharedDefaults.shared.focusedRoute != nil {
+            SharedDefaults.shared.focusedRoute = nil
+            SharedDefaults.shared.focusedRouteExpiry = nil
+        }
+        return [
+            TransitWidgetEntry(date: Date(), config: config, trains: trains, focusedRoute: nil, isPlaceholder: false)
+        ]
     }
 }
 

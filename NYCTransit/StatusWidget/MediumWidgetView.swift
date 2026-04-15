@@ -24,63 +24,64 @@ struct MediumWidgetView: View {
     private func focusedView(_ train: ProcessedTrain) -> some View {
         let detail = train.alertDetail?.isEmpty == false ? train.alertDetail! : nil
 
-        return Button(intent: ToggleStatusIntent(route: train.route)) {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(spacing: 10) {
-                    TrainCircleView(route: train.route, size: 32)
-                    Text(train.statusSummary)
-                        .font(.system(size: 15, weight: .heavy))
-                        .foregroundStyle(foregroundColor)
-                    Spacer(minLength: 0)
-                }
+        return VStack(spacing: 0) {
+            Button(intent: ToggleStatusIntent(route: train.route)) {
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(spacing: 10) {
+                        TrainCircleView(route: train.route, size: 32, iconOverride: config.iconOverride)
+                        Text(train.statusSummary)
+                            .font(.system(size: 15, weight: .heavy))
+                            .foregroundStyle(foregroundColor)
+                        Spacer(minLength: 0)
+                    }
 
-                if let detail {
-                    Text(detail)
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundStyle(foregroundColor.opacity(0.7))
-                        .lineSpacing(2)
-                        .multilineTextAlignment(.leading)
-                        .minimumScaleFactor(0.6)
-                        .lineLimit(6)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 6)
-                        .background(foregroundColor.opacity(0.06))
-                        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    if let detail {
+                        Text(detail)
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundStyle(foregroundColor.opacity(0.7))
+                            .lineSpacing(2)
+                            .multilineTextAlignment(.leading)
+                            .minimumScaleFactor(0.6)
+                            .lineLimit(5)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 6)
+                            .background(foregroundColor.opacity(0.06))
+                            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    }
                 }
+                .frame(maxWidth: .infinity, alignment: .topLeading)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .padding(12)
+            .buttonStyle(.plain)
+
+            Spacer(minLength: 2)
+
+            Button(intent: RefreshIntent()) {
+                Text("Refresh All Trains")
+                    .font(.system(size: 10, weight: .semibold))
+                    .foregroundStyle(foregroundColor.opacity(0.5))
+            }
+            .buttonStyle(.plain)
         }
-        .buttonStyle(.plain)
+        .padding(12)
     }
 
     private var gridView: some View {
-        ZStack(alignment: .topTrailing) {
-            Group {
-                if trains.isEmpty {
-                    HStack(spacing: 8) {
-                        Image(systemName: "tram.fill")
-                            .font(.system(size: 20))
-                            .foregroundStyle(foregroundColor.opacity(0.4))
-                        Text("Add trains in the app to see status here")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(foregroundColor.opacity(0.5))
-                    }
-                } else {
-                    trainGrid
+        Group {
+            if trains.isEmpty {
+                HStack(spacing: 8) {
+                    Image(systemName: "tram.fill")
+                        .font(.system(size: 20))
+                        .foregroundStyle(foregroundColor.opacity(0.4))
+                    Text("Add trains in the app to see status here")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(foregroundColor.opacity(0.5))
                 }
+            } else {
+                trainGrid
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-            Button(intent: RefreshIntent()) {
-                Image(systemName: "arrow.clockwise")
-                    .font(.system(size: 10, weight: .semibold))
-                    .foregroundStyle(foregroundColor.opacity(0.4))
-            }
-            .buttonStyle(.plain)
-            .padding(6)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(4)
     }
 
@@ -89,7 +90,7 @@ struct MediumWidgetView: View {
 
         return VStack(spacing: config.vSpacing) {
             ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
-                HStack(spacing: config.hSpacing) {
+                HStack(alignment: .top, spacing: config.hSpacing) {
                     ForEach(row) { train in
                         trainCell(train)
                     }
@@ -101,7 +102,7 @@ struct MediumWidgetView: View {
     private func trainCell(_ train: ProcessedTrain) -> some View {
         Button(intent: ToggleStatusIntent(route: train.route)) {
             VStack(spacing: 2) {
-                TrainCircleView(route: train.route, size: config.circleSize)
+                TrainCircleView(route: train.route, size: config.circleSize, iconOverride: config.iconOverride)
                 Text(train.formattedStatus)
                     .font(.system(size: max(config.fontSize - 2, 7), weight: .bold))
                     .foregroundStyle(foregroundColor.opacity(0.85))

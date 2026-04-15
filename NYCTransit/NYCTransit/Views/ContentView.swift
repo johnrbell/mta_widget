@@ -36,6 +36,7 @@ struct ContentView: View {
                     previewSection
                     trainPickerSection
                     slidersSection
+                    iconOverrideSection
                     themeSection
                     statusBar
                     addWidgetButton
@@ -43,6 +44,7 @@ struct ContentView: View {
                 .padding()
                 .animation(.easeInOut(duration: 0.25), value: activeConfig.wrappedValue.selectedRoutes)
                 .animation(.easeInOut(duration: 0.25), value: activeConfig.wrappedValue.theme)
+                .animation(.easeInOut(duration: 0.25), value: activeConfig.wrappedValue.iconOverride)
             }
             .navigationTitle("NYC Transit")
             .toolbar {
@@ -149,6 +151,52 @@ struct ContentView: View {
                 .font(.subheadline.monospacedDigit())
                 .foregroundStyle(.secondary)
                 .frame(width: 28, alignment: .trailing)
+        }
+    }
+
+    // MARK: - Icon Override
+
+    private var iconOverrideSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Toggle("Icon Override", isOn: activeConfig.iconOverride.enabled)
+                .font(.headline)
+
+            if activeConfig.wrappedValue.iconOverride.enabled {
+                VStack(spacing: 12) {
+                    opacityRow(label: "Letter", value: activeConfig.iconOverride.letterOpacity, colorHex: activeConfig.iconOverride.letterColorHex)
+                    opacityRow(label: "Stroke", value: activeConfig.iconOverride.strokeOpacity, colorHex: activeConfig.iconOverride.strokeColorHex)
+                    sliderRow(label: "Width", value: activeConfig.iconOverride.strokeWidth, range: 0...20, step: 1)
+                    opacityRow(label: "Fill", value: activeConfig.iconOverride.fillOpacity, colorHex: activeConfig.iconOverride.fillColorHex)
+                }
+                .transition(.opacity.combined(with: .move(edge: .top)))
+                .onChange(of: activeConfig.wrappedValue.iconOverride.fillColorHex) { _, newColor in
+                    activeConfig.wrappedValue.iconOverride.letterColorHex = newColor
+                    activeConfig.wrappedValue.iconOverride.strokeColorHex = newColor
+                }
+            }
+        }
+    }
+
+    private func colorBinding(for hexBinding: Binding<String>) -> Binding<Color> {
+        Binding<Color>(
+            get: { Color(hex: hexBinding.wrappedValue) },
+            set: { hexBinding.wrappedValue = $0.hexString }
+        )
+    }
+
+    private func opacityRow(label: String, value: Binding<Double>, colorHex: Binding<String>) -> some View {
+        HStack(spacing: 8) {
+            Text(label)
+                .font(.subheadline)
+                .frame(width: 48, alignment: .leading)
+            Slider(value: value, in: 0...1, step: 0.01)
+            Text("\(Int(value.wrappedValue * 100))%")
+                .font(.subheadline.monospacedDigit())
+                .foregroundStyle(.secondary)
+                .frame(width: 36, alignment: .trailing)
+            ColorPicker("", selection: colorBinding(for: colorHex), supportsOpacity: false)
+                .labelsHidden()
+                .frame(width: 28)
         }
     }
 

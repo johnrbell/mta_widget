@@ -20,8 +20,10 @@ struct ToggleStatusIntent: AppIntent {
         let current = SharedDefaults.shared.focusedRoute
         if current != nil {
             SharedDefaults.shared.focusedRoute = nil
+            SharedDefaults.shared.focusedRouteExpiry = nil
         } else {
             SharedDefaults.shared.focusedRoute = route
+            SharedDefaults.shared.focusedRouteExpiry = Date().addingTimeInterval(10)
         }
         return .result()
     }

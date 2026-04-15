@@ -18,8 +18,6 @@ targets:
     sources:
       - path: NYCTransit
       - path: Shared
-    resources:
-      - path: Assets.xcassets
     settings:
       base:
         INFOPLIST_FILE: NYCTransit/Info.plist
@@ -36,8 +34,7 @@ targets:
     sources:
       - path: StatusWidget
       - path: Shared
-    resources:
-      - path: Assets.xcassets
+      - path: NYCTransit/Assets.xcassets
     settings:
       base:
         INFOPLIST_FILE: StatusWidget/Info.plist

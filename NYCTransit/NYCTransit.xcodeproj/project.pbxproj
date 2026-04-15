@@ -7,59 +7,59 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0427824435C5BE5770B9EE3B /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF7C4D9349B682E52FD5B79 /* SmallWidgetView.swift */; };
-		0C3D7B86E414B80BCC951F2B /* TrainLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B117842AF105AD7CD11083 /* TrainLine.swift */; };
-		0F516D1FA88FDC1031583C43 /* StatusWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE9B8C92D7191E5E5FBC459 /* StatusWidgetBundle.swift */; };
-		1FD63D9F8ACBB7BB5A1DA754 /* TrainPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECA05D771B565981A7ECCA4 /* TrainPickerView.swift */; };
-		220B47BFF2E19590A4F7B127 /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A21057F405D1D6DAF05C8E6 /* MediumWidgetView.swift */; };
-		28228B48A8F62853E9042708 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169FCCFC564D23BE6AE4B50 /* Constants.swift */; };
-		2A6E79DB0A0A1D9C72F496DB /* StatusWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CA8F1FC0611028C4DAC49D34 /* StatusWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		30A84DD5C6FFEE1EBA3FF7E3 /* LineColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68C0F68EF073C43F450F00 /* LineColors.swift */; };
-		31E3144A75E45C1EFABFE1BC /* TrainCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1F373E3C1FFCCFFEE7758 /* TrainCircleView.swift */; };
-		35EE55B6417F31E54491C1DD /* RefreshIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2392463FB0BC7FC93E9450A0 /* RefreshIntent.swift */; };
-		551C8BA6EAD22D2C3AC1B74E /* StatusWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD53C43E4EAAEEFB1DF6F043 /* StatusWidget.swift */; };
-		56EAA6EBF80C0744D723F3F0 /* WidgetBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42FB7561E64F9B7AEDDBB40 /* WidgetBackground.swift */; };
-		5F46502DB257069003610AC2 /* OnboardingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5F59FADA5D3953DE0A8B08 /* OnboardingSheet.swift */; };
-		6106D17CADA663744D3A6FCE /* ProcessedTrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D4150F7B52D2D0FB8A4DE /* ProcessedTrain.swift */; };
-		67E5C8708E6C55147CDA1AA1 /* TimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6983F9906B7380B4AD9E79B /* TimelineProvider.swift */; };
-		6B96A0C59A7ADC88CC03AE69 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8169FCCFC564D23BE6AE4B50 /* Constants.swift */; };
-		731BD717B4C196DFE288C52D /* ToggleStatusIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5330CC0BDA36D873EE5152 /* ToggleStatusIntent.swift */; };
-		7F801DDE5681B3286DFB1253 /* WidgetConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD02CEDB05433B42177D66 /* WidgetConfiguration.swift */; };
-		96840B2212362294B317CD8F /* TrainLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B117842AF105AD7CD11083 /* TrainLine.swift */; };
-		988BEB96552ED89EC0FB3DCC /* TransitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09435009DDEF9F26D1FB09AD /* TransitService.swift */; };
-		9E1D4147D446D6A01CB07F86 /* LineColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A68C0F68EF073C43F450F00 /* LineColors.swift */; };
-		A5B2F020D546A07020AA9DF1 /* WidgetPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C6A1165BBA491B7F2485BC /* WidgetPreviewView.swift */; };
-		B98F8A09ABA53334B2394B65 /* TrainCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF1F373E3C1FFCCFFEE7758 /* TrainCircleView.swift */; };
-		BA84BF0532B02BEAD67F747F /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F22EFEE887AFC4C22F868E /* ThemePickerView.swift */; };
-		C7C46E0AB81D0B8C8AAAD0D7 /* ProcessedTrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D4150F7B52D2D0FB8A4DE /* ProcessedTrain.swift */; };
-		CBDD24AEB0238EE900F05B2E /* WidgetConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AD02CEDB05433B42177D66 /* WidgetConfiguration.swift */; };
-		D09FBED0FBAB6D8865D5320C /* TransitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09435009DDEF9F26D1FB09AD /* TransitService.swift */; };
-		DB1235EBA91601A7E5CAA0D4 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2885E1C7EB93AFB56B2AAB /* SharedDefaults.swift */; };
-		E63FB9E565660CAE8823451F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349E85CB7A28E410699FDAD2 /* ContentView.swift */; };
-		EC5826BAA20FE6C8DF35B528 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2885E1C7EB93AFB56B2AAB /* SharedDefaults.swift */; };
-		FF860553B8B4920227C7BFBA /* NYCTransitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CFC70A8B38AB3B2CB60740 /* NYCTransitApp.swift */; };
-		AA1111111111111111111111 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2222222222222222222222 /* Assets.xcassets */; };
-		AA3333333333333333333333 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2222222222222222222222 /* Assets.xcassets */; };
+		15F026E3FF655A3C681E8805 /* NYCTransitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A818AF17B2DEC707A9B931AB /* NYCTransitApp.swift */; };
+		1F32BA45837A0B4EAC59107A /* TrainPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393BF3320E3ECB1AE7452068 /* TrainPickerView.swift */; };
+		33EA50D4DEA494AFD9CDE5A3 /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA81C8B6FBF48904F4B231 /* SmallWidgetView.swift */; };
+		435C92AF1ED7705F0496C05F /* WidgetBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EAAFB719F3C86B9ACC8238 /* WidgetBackground.swift */; };
+		465051063BE57E8581FC56AF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C30FB3CDC1EDA7326715C6 /* ContentView.swift */; };
+		4BC6D020E96E09A06BD6D560 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B88CFB07B9A909B888DC8CC /* Constants.swift */; };
+		4EAA783CE8A1F8A7533A91B5 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C668B6CB54B8F3989955F365 /* SharedDefaults.swift */; };
+		55D659531BA4D2D48957DF50 /* OnboardingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F1C6C6889440EE668698A0 /* OnboardingSheet.swift */; };
+		58326B47FB60B3D0A376039A /* TransitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23EB28F5DFDAA8923D5C9 /* TransitService.swift */; };
+		794137AA68CB2BAB9463472F /* TimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3932C24BA5F8B80DADEE84E0 /* TimelineProvider.swift */; };
+		7C8232BA2681EBC02699B9DE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B88CFB07B9A909B888DC8CC /* Constants.swift */; };
+		80F901863C43FE0B8966A434 /* WidgetPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9889DAF66174CDFB7E598DDC /* WidgetPreviewView.swift */; };
+		838248831D2F2B9DBFBB6A5B /* WidgetConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C48629F901F91921E8CFDF /* WidgetConfiguration.swift */; };
+		9C2AE6619D7C5E5C2FE8A369 /* LineColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFA379777D006DC901DD1A0 /* LineColors.swift */; };
+		9F21B305009669B028CBC6DF /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C668B6CB54B8F3989955F365 /* SharedDefaults.swift */; };
+		A03161352707976CB80930CA /* TrainCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3C449337B30085AE3407F4 /* TrainCircleView.swift */; };
+		A28BB034277C6343F9971846 /* RefreshIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDB6FAA6156ABCB14C9E982 /* RefreshIntent.swift */; };
+		A2EABF1DFF0616A28CDB69C4 /* StatusWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 553B61071962251E16E5B27E /* StatusWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A50518E63F7EDFE605A4043E /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051C7593DEACDA002FD23E71 /* MediumWidgetView.swift */; };
+		AF4CA5EEE12AFB4E20FD68C3 /* TransitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C23EB28F5DFDAA8923D5C9 /* TransitService.swift */; };
+		B0E8079B31DFC3BB5A5EABE5 /* TrainLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D29CAA26F98FEB833F6C3E3 /* TrainLine.swift */; };
+		BCF1118DC0413D460C1AFC33 /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDD01AEEB4052E957DDC5B7 /* ThemePickerView.swift */; };
+		BD376AF66225369A1028A260 /* ToggleStatusIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B02E29793EBA7B944977478 /* ToggleStatusIntent.swift */; };
+		C10603EFCA5384A7EAFE842E /* ProcessedTrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF4A92DC3834D3E734BF6BE /* ProcessedTrain.swift */; };
+		C286FDF63F95949289385DBD /* WidgetConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C48629F901F91921E8CFDF /* WidgetConfiguration.swift */; };
+		C4F86EE85924A74732EC01C5 /* LineColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFA379777D006DC901DD1A0 /* LineColors.swift */; };
+		C6B6B6BB6919B99BBFCD0632 /* TrainCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3C449337B30085AE3407F4 /* TrainCircleView.swift */; };
+		CA382363E36B116073624AC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBF38A7E0054C199E773309E /* Assets.xcassets */; };
+		D6E053618B8F1B39914EE047 /* TrainLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D29CAA26F98FEB833F6C3E3 /* TrainLine.swift */; };
+		DA0F42FFA325FECDF61D51C6 /* StatusWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BEA836132C078FABFDDA3E /* StatusWidget.swift */; };
+		F106273B6DD8DD899553DD95 /* ProcessedTrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF4A92DC3834D3E734BF6BE /* ProcessedTrain.swift */; };
+		F857B613B858A4CC73A70349 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBF38A7E0054C199E773309E /* Assets.xcassets */; };
+		FBA42E5B05D874A68CBB9D31 /* StatusWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A65D5668876205C5B105BD /* StatusWidgetBundle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7BDCF09D58ABCBF584D45926 /* PBXContainerItemProxy */ = {
+		EA4377039E67FB7007A91511 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9CF5C9CBA1ED9CCC9AE8041C /* Project object */;
+			containerPortal = B973FB91F9571F5704D2B32E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E809FB75762F3AC876B99711;
+			remoteGlobalIDString = E3DDC6E29A471FE698653AFC;
 			remoteInfo = StatusWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B5D5BCA8835B5B2A1CEDD0C7 /* Embed Foundation Extensions */ = {
+		EE6A94FB16C0BCD5C97880F8 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				2A6E79DB0A0A1D9C72F496DB /* StatusWidgetExtension.appex in Embed Foundation Extensions */,
+				A2EABF1DFF0616A28CDB69C4 /* StatusWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -67,177 +67,158 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		09435009DDEF9F26D1FB09AD /* TransitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitService.swift; sourceTree = "<group>"; };
-		0B4E4A026E49988C8D867284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		0BF7C4D9349B682E52FD5B79 /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
-		22AD02CEDB05433B42177D66 /* WidgetConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetConfiguration.swift; sourceTree = "<group>"; };
-		2392463FB0BC7FC93E9450A0 /* RefreshIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshIntent.swift; sourceTree = "<group>"; };
-		2A68C0F68EF073C43F450F00 /* LineColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineColors.swift; sourceTree = "<group>"; };
-		2F2885E1C7EB93AFB56B2AAB /* SharedDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDefaults.swift; sourceTree = "<group>"; };
-		349E85CB7A28E410699FDAD2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		38F22EFEE887AFC4C22F868E /* ThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerView.swift; sourceTree = "<group>"; };
-		488D8F0063EEAECF11680991 /* NYCTransit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NYCTransit.entitlements; sourceTree = "<group>"; };
-		5A21057F405D1D6DAF05C8E6 /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
-		6F5F59FADA5D3953DE0A8B08 /* OnboardingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSheet.swift; sourceTree = "<group>"; };
-		73C6A1165BBA491B7F2485BC /* WidgetPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetPreviewView.swift; sourceTree = "<group>"; };
-		7C4D2C31CAA32D3A2CB4CE0A /* NYCTransit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = NYCTransit.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E9D4150F7B52D2D0FB8A4DE /* ProcessedTrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedTrain.swift; sourceTree = "<group>"; };
-		8169FCCFC564D23BE6AE4B50 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		A42FB7561E64F9B7AEDDBB40 /* WidgetBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBackground.swift; sourceTree = "<group>"; };
-		A6983F9906B7380B4AD9E79B /* TimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineProvider.swift; sourceTree = "<group>"; };
-		B7448DA74989AB0D5104377B /* StatusWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StatusWidget.entitlements; sourceTree = "<group>"; };
-		C0CFC70A8B38AB3B2CB60740 /* NYCTransitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCTransitApp.swift; sourceTree = "<group>"; };
-		CA8F1FC0611028C4DAC49D34 /* StatusWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = StatusWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF5330CC0BDA36D873EE5152 /* ToggleStatusIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleStatusIntent.swift; sourceTree = "<group>"; };
-		DB8394810709A8C43C27AD99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		DEE9B8C92D7191E5E5FBC459 /* StatusWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusWidgetBundle.swift; sourceTree = "<group>"; };
-		EECA05D771B565981A7ECCA4 /* TrainPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainPickerView.swift; sourceTree = "<group>"; };
-		F8B117842AF105AD7CD11083 /* TrainLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainLine.swift; sourceTree = "<group>"; };
-		FD53C43E4EAAEEFB1DF6F043 /* StatusWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusWidget.swift; sourceTree = "<group>"; };
-		FEF1F373E3C1FFCCFFEE7758 /* TrainCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainCircleView.swift; sourceTree = "<group>"; };
-		AA2222222222222222222222 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		01AA81C8B6FBF48904F4B231 /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
+		051C7593DEACDA002FD23E71 /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
+		08BEA836132C078FABFDDA3E /* StatusWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusWidget.swift; sourceTree = "<group>"; };
+		08C23EB28F5DFDAA8923D5C9 /* TransitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitService.swift; sourceTree = "<group>"; };
+		0935AACAA913D2E9AFA81FD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2B88CFB07B9A909B888DC8CC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3932C24BA5F8B80DADEE84E0 /* TimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineProvider.swift; sourceTree = "<group>"; };
+		393BF3320E3ECB1AE7452068 /* TrainPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainPickerView.swift; sourceTree = "<group>"; };
+		4DDB6FAA6156ABCB14C9E982 /* RefreshIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshIntent.swift; sourceTree = "<group>"; };
+		553B61071962251E16E5B27E /* StatusWidgetExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = StatusWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B02E29793EBA7B944977478 /* ToggleStatusIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleStatusIntent.swift; sourceTree = "<group>"; };
+		5BFA379777D006DC901DD1A0 /* LineColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineColors.swift; sourceTree = "<group>"; };
+		5CF4A92DC3834D3E734BF6BE /* ProcessedTrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedTrain.swift; sourceTree = "<group>"; };
+		61C48629F901F91921E8CFDF /* WidgetConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetConfiguration.swift; sourceTree = "<group>"; };
+		62C30FB3CDC1EDA7326715C6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		71EAAFB719F3C86B9ACC8238 /* WidgetBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBackground.swift; sourceTree = "<group>"; };
+		7CDD01AEEB4052E957DDC5B7 /* ThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerView.swift; sourceTree = "<group>"; };
+		80A65D5668876205C5B105BD /* StatusWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusWidgetBundle.swift; sourceTree = "<group>"; };
+		8D29CAA26F98FEB833F6C3E3 /* TrainLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainLine.swift; sourceTree = "<group>"; };
+		9889DAF66174CDFB7E598DDC /* WidgetPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetPreviewView.swift; sourceTree = "<group>"; };
+		98F1C6C6889440EE668698A0 /* OnboardingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSheet.swift; sourceTree = "<group>"; };
+		99936F711A1CF217BCE263DD /* StatusWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StatusWidget.entitlements; sourceTree = "<group>"; };
+		A818AF17B2DEC707A9B931AB /* NYCTransitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYCTransitApp.swift; sourceTree = "<group>"; };
+		B5C12F8AF8415CD621EFA20B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C668B6CB54B8F3989955F365 /* SharedDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDefaults.swift; sourceTree = "<group>"; };
+		CB3C449337B30085AE3407F4 /* TrainCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainCircleView.swift; sourceTree = "<group>"; };
+		CEF28818AE0D284A59CDADE2 /* NYCTransit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NYCTransit.entitlements; sourceTree = "<group>"; };
+		EBF38A7E0054C199E773309E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F92CF0BA9EDF7BE92651D259 /* NYCTransit.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = NYCTransit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		379B3F6AB59B52F8BBEF2E81 /* StatusWidget */ = {
+		256325B66C190B9A1F849A2C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0B4E4A026E49988C8D867284 /* Info.plist */,
-				5A21057F405D1D6DAF05C8E6 /* MediumWidgetView.swift */,
-				2392463FB0BC7FC93E9450A0 /* RefreshIntent.swift */,
-				0BF7C4D9349B682E52FD5B79 /* SmallWidgetView.swift */,
-				B7448DA74989AB0D5104377B /* StatusWidget.entitlements */,
-				FD53C43E4EAAEEFB1DF6F043 /* StatusWidget.swift */,
-				DEE9B8C92D7191E5E5FBC459 /* StatusWidgetBundle.swift */,
-				A6983F9906B7380B4AD9E79B /* TimelineProvider.swift */,
-				CF5330CC0BDA36D873EE5152 /* ToggleStatusIntent.swift */,
-				A42FB7561E64F9B7AEDDBB40 /* WidgetBackground.swift */,
-			);
-			path = StatusWidget;
-			sourceTree = "<group>";
-		};
-		64F833C54484098962F00E62 /* NYCTransit */ = {
-			isa = PBXGroup;
-			children = (
-				DB8394810709A8C43C27AD99 /* Info.plist */,
-				488D8F0063EEAECF11680991 /* NYCTransit.entitlements */,
-				C0CFC70A8B38AB3B2CB60740 /* NYCTransitApp.swift */,
-				F4C15AC63E0D18D530BD125C /* Views */,
-			);
-			path = NYCTransit;
-			sourceTree = "<group>";
-		};
-		6713D96CC4D04B2B5F02CC87 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				09435009DDEF9F26D1FB09AD /* TransitService.swift */,
+				08C23EB28F5DFDAA8923D5C9 /* TransitService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		8AB81F9942ED447C99F8A486 /* Models */ = {
+		39EA764297CB74D2E2FA2B52 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7E9D4150F7B52D2D0FB8A4DE /* ProcessedTrain.swift */,
-				F8B117842AF105AD7CD11083 /* TrainLine.swift */,
-				22AD02CEDB05433B42177D66 /* WidgetConfiguration.swift */,
+				5CF4A92DC3834D3E734BF6BE /* ProcessedTrain.swift */,
+				8D29CAA26F98FEB833F6C3E3 /* TrainLine.swift */,
+				61C48629F901F91921E8CFDF /* WidgetConfiguration.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		9A1994CFDD446F553642197F /* Products */ = {
+		3E68D1AD275D69E6E78174EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7C4D2C31CAA32D3A2CB4CE0A /* NYCTransit.app */,
-				CA8F1FC0611028C4DAC49D34 /* StatusWidgetExtension.appex */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		9CBC0F5ADCE70F2C75E77E31 = {
-			isa = PBXGroup;
-			children = (
-				AA2222222222222222222222 /* Assets.xcassets */,
-				64F833C54484098962F00E62 /* NYCTransit */,
-				C4CE1995FFA469EC28911361 /* Shared */,
-				379B3F6AB59B52F8BBEF2E81 /* StatusWidget */,
-				9A1994CFDD446F553642197F /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		C4CE1995FFA469EC28911361 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				8169FCCFC564D23BE6AE4B50 /* Constants.swift */,
-				2A68C0F68EF073C43F450F00 /* LineColors.swift */,
-				2F2885E1C7EB93AFB56B2AAB /* SharedDefaults.swift */,
-				FEF1F373E3C1FFCCFFEE7758 /* TrainCircleView.swift */,
-				8AB81F9942ED447C99F8A486 /* Models */,
-				6713D96CC4D04B2B5F02CC87 /* Services */,
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
-		F4C15AC63E0D18D530BD125C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				349E85CB7A28E410699FDAD2 /* ContentView.swift */,
-				6F5F59FADA5D3953DE0A8B08 /* OnboardingSheet.swift */,
-				38F22EFEE887AFC4C22F868E /* ThemePickerView.swift */,
-				EECA05D771B565981A7ECCA4 /* TrainPickerView.swift */,
-				73C6A1165BBA491B7F2485BC /* WidgetPreviewView.swift */,
+				62C30FB3CDC1EDA7326715C6 /* ContentView.swift */,
+				98F1C6C6889440EE668698A0 /* OnboardingSheet.swift */,
+				7CDD01AEEB4052E957DDC5B7 /* ThemePickerView.swift */,
+				393BF3320E3ECB1AE7452068 /* TrainPickerView.swift */,
+				9889DAF66174CDFB7E598DDC /* WidgetPreviewView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
+		552DE5AE29E69767C959F2AC /* NYCTransit */ = {
+			isa = PBXGroup;
+			children = (
+				EBF38A7E0054C199E773309E /* Assets.xcassets */,
+				0935AACAA913D2E9AFA81FD8 /* Info.plist */,
+				CEF28818AE0D284A59CDADE2 /* NYCTransit.entitlements */,
+				A818AF17B2DEC707A9B931AB /* NYCTransitApp.swift */,
+				3E68D1AD275D69E6E78174EA /* Views */,
+			);
+			path = NYCTransit;
+			sourceTree = "<group>";
+		};
+		5BE673C057850EBF82A6768D /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				2B88CFB07B9A909B888DC8CC /* Constants.swift */,
+				5BFA379777D006DC901DD1A0 /* LineColors.swift */,
+				C668B6CB54B8F3989955F365 /* SharedDefaults.swift */,
+				CB3C449337B30085AE3407F4 /* TrainCircleView.swift */,
+				39EA764297CB74D2E2FA2B52 /* Models */,
+				256325B66C190B9A1F849A2C /* Services */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		AF0257B19010567ACA390496 = {
+			isa = PBXGroup;
+			children = (
+				552DE5AE29E69767C959F2AC /* NYCTransit */,
+				5BE673C057850EBF82A6768D /* Shared */,
+				E0925ECFB3801D53AA202DFB /* StatusWidget */,
+				B32281D71FDF7311B085B45D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B32281D71FDF7311B085B45D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F92CF0BA9EDF7BE92651D259 /* NYCTransit.app */,
+				553B61071962251E16E5B27E /* StatusWidgetExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E0925ECFB3801D53AA202DFB /* StatusWidget */ = {
+			isa = PBXGroup;
+			children = (
+				B5C12F8AF8415CD621EFA20B /* Info.plist */,
+				051C7593DEACDA002FD23E71 /* MediumWidgetView.swift */,
+				4DDB6FAA6156ABCB14C9E982 /* RefreshIntent.swift */,
+				01AA81C8B6FBF48904F4B231 /* SmallWidgetView.swift */,
+				99936F711A1CF217BCE263DD /* StatusWidget.entitlements */,
+				08BEA836132C078FABFDDA3E /* StatusWidget.swift */,
+				80A65D5668876205C5B105BD /* StatusWidgetBundle.swift */,
+				3932C24BA5F8B80DADEE84E0 /* TimelineProvider.swift */,
+				5B02E29793EBA7B944977478 /* ToggleStatusIntent.swift */,
+				71EAAFB719F3C86B9ACC8238 /* WidgetBackground.swift */,
+			);
+			path = StatusWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
-/* Begin PBXResourcesBuildPhase section */
-		AA4444444444444444444444 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AA1111111111111111111111 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AA5555555555555555555555 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AA3333333333333333333333 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		5C85CFE21B07500ADDEB8A17 /* NYCTransit */ = {
+		487DC4D7B1D0396FA879DCB2 /* NYCTransit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4F9C88EC12483BCB062A8AF /* Build configuration list for PBXNativeTarget "NYCTransit" */;
+			buildConfigurationList = D185C7FAA4D4651DD6502996 /* Build configuration list for PBXNativeTarget "NYCTransit" */;
 			buildPhases = (
-				8D14077F98266F76A94C4755 /* Sources */,
-				AA4444444444444444444444 /* Resources */,
-				B5D5BCA8835B5B2A1CEDD0C7 /* Embed Foundation Extensions */,
+				B4E824A96CD3C27841CCE5FD /* Sources */,
+				C06D93CA2E078BE3D4862030 /* Resources */,
+				EE6A94FB16C0BCD5C97880F8 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3A4D5DBAF9895D7F59CB947F /* PBXTargetDependency */,
+				DBF1A4F2BD14F4432FB25A7C /* PBXTargetDependency */,
 			);
 			name = NYCTransit;
 			packageProductDependencies = (
 			);
 			productName = NYCTransit;
-			productReference = 7C4D2C31CAA32D3A2CB4CE0A /* NYCTransit.app */;
+			productReference = F92CF0BA9EDF7BE92651D259 /* NYCTransit.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E809FB75762F3AC876B99711 /* StatusWidgetExtension */ = {
+		E3DDC6E29A471FE698653AFC /* StatusWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DDF5342C916830006B5DD979 /* Build configuration list for PBXNativeTarget "StatusWidgetExtension" */;
+			buildConfigurationList = CAE26DF4851C93A018D9056A /* Build configuration list for PBXNativeTarget "StatusWidgetExtension" */;
 			buildPhases = (
-				EC37DA2115297946B0DC67B2 /* Sources */,
-				AA5555555555555555555555 /* Resources */,
+				37B9E4C70976788D16B41995 /* Sources */,
+				DF51F6F03F0397B7A18190BC /* Resources */,
 			);
 			buildRules = (
 			);
@@ -247,103 +228,139 @@
 			packageProductDependencies = (
 			);
 			productName = StatusWidgetExtension;
-			productReference = CA8F1FC0611028C4DAC49D34 /* StatusWidgetExtension.appex */;
+			productReference = 553B61071962251E16E5B27E /* StatusWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		9CF5C9CBA1ED9CCC9AE8041C /* Project object */ = {
+		B973FB91F9571F5704D2B32E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					5C85CFE21B07500ADDEB8A17 = {
-						DevelopmentTeam = C89K893TQH;
+					487DC4D7B1D0396FA879DCB2 = {
+						DevelopmentTeam = "";
 					};
-					E809FB75762F3AC876B99711 = {
-						DevelopmentTeam = C89K893TQH;
+					E3DDC6E29A471FE698653AFC = {
+						DevelopmentTeam = "";
 					};
 				};
 			};
-			buildConfigurationList = 0F5678F4855A9FF0E786F0BA /* Build configuration list for PBXProject "NYCTransit" */;
+			buildConfigurationList = 6D33B204406D82F646BFA914 /* Build configuration list for PBXProject "NYCTransit" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
 				en,
 			);
-			mainGroup = 9CBC0F5ADCE70F2C75E77E31;
+			mainGroup = AF0257B19010567ACA390496;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 9A1994CFDD446F553642197F /* Products */;
+			productRefGroup = B32281D71FDF7311B085B45D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5C85CFE21B07500ADDEB8A17 /* NYCTransit */,
-				E809FB75762F3AC876B99711 /* StatusWidgetExtension */,
+				487DC4D7B1D0396FA879DCB2 /* NYCTransit */,
+				E3DDC6E29A471FE698653AFC /* StatusWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXSourcesBuildPhase section */
-		8D14077F98266F76A94C4755 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+/* Begin PBXResourcesBuildPhase section */
+		C06D93CA2E078BE3D4862030 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28228B48A8F62853E9042708 /* Constants.swift in Sources */,
-				E63FB9E565660CAE8823451F /* ContentView.swift in Sources */,
-				9E1D4147D446D6A01CB07F86 /* LineColors.swift in Sources */,
-				D09FBED0FBAB6D8865D5320C /* TransitService.swift in Sources */,
-				FF860553B8B4920227C7BFBA /* NYCTransitApp.swift in Sources */,
-				5F46502DB257069003610AC2 /* OnboardingSheet.swift in Sources */,
-				6106D17CADA663744D3A6FCE /* ProcessedTrain.swift in Sources */,
-				EC5826BAA20FE6C8DF35B528 /* SharedDefaults.swift in Sources */,
-				BA84BF0532B02BEAD67F747F /* ThemePickerView.swift in Sources */,
-				31E3144A75E45C1EFABFE1BC /* TrainCircleView.swift in Sources */,
-				96840B2212362294B317CD8F /* TrainLine.swift in Sources */,
-				1FD63D9F8ACBB7BB5A1DA754 /* TrainPickerView.swift in Sources */,
-				CBDD24AEB0238EE900F05B2E /* WidgetConfiguration.swift in Sources */,
-				A5B2F020D546A07020AA9DF1 /* WidgetPreviewView.swift in Sources */,
+				CA382363E36B116073624AC1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EC37DA2115297946B0DC67B2 /* Sources */ = {
+		DF51F6F03F0397B7A18190BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F857B613B858A4CC73A70349 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		37B9E4C70976788D16B41995 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B96A0C59A7ADC88CC03AE69 /* Constants.swift in Sources */,
-				30A84DD5C6FFEE1EBA3FF7E3 /* LineColors.swift in Sources */,
-				988BEB96552ED89EC0FB3DCC /* TransitService.swift in Sources */,
-				220B47BFF2E19590A4F7B127 /* MediumWidgetView.swift in Sources */,
-				C7C46E0AB81D0B8C8AAAD0D7 /* ProcessedTrain.swift in Sources */,
-				35EE55B6417F31E54491C1DD /* RefreshIntent.swift in Sources */,
-				DB1235EBA91601A7E5CAA0D4 /* SharedDefaults.swift in Sources */,
-				0427824435C5BE5770B9EE3B /* SmallWidgetView.swift in Sources */,
-				551C8BA6EAD22D2C3AC1B74E /* StatusWidget.swift in Sources */,
-				0F516D1FA88FDC1031583C43 /* StatusWidgetBundle.swift in Sources */,
-				67E5C8708E6C55147CDA1AA1 /* TimelineProvider.swift in Sources */,
-				731BD717B4C196DFE288C52D /* ToggleStatusIntent.swift in Sources */,
-				B98F8A09ABA53334B2394B65 /* TrainCircleView.swift in Sources */,
-				0C3D7B86E414B80BCC951F2B /* TrainLine.swift in Sources */,
-				56EAA6EBF80C0744D723F3F0 /* WidgetBackground.swift in Sources */,
-				7F801DDE5681B3286DFB1253 /* WidgetConfiguration.swift in Sources */,
+				7C8232BA2681EBC02699B9DE /* Constants.swift in Sources */,
+				C4F86EE85924A74732EC01C5 /* LineColors.swift in Sources */,
+				A50518E63F7EDFE605A4043E /* MediumWidgetView.swift in Sources */,
+				C10603EFCA5384A7EAFE842E /* ProcessedTrain.swift in Sources */,
+				A28BB034277C6343F9971846 /* RefreshIntent.swift in Sources */,
+				4EAA783CE8A1F8A7533A91B5 /* SharedDefaults.swift in Sources */,
+				33EA50D4DEA494AFD9CDE5A3 /* SmallWidgetView.swift in Sources */,
+				DA0F42FFA325FECDF61D51C6 /* StatusWidget.swift in Sources */,
+				FBA42E5B05D874A68CBB9D31 /* StatusWidgetBundle.swift in Sources */,
+				794137AA68CB2BAB9463472F /* TimelineProvider.swift in Sources */,
+				BD376AF66225369A1028A260 /* ToggleStatusIntent.swift in Sources */,
+				A03161352707976CB80930CA /* TrainCircleView.swift in Sources */,
+				D6E053618B8F1B39914EE047 /* TrainLine.swift in Sources */,
+				58326B47FB60B3D0A376039A /* TransitService.swift in Sources */,
+				435C92AF1ED7705F0496C05F /* WidgetBackground.swift in Sources */,
+				838248831D2F2B9DBFBB6A5B /* WidgetConfiguration.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4E824A96CD3C27841CCE5FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BC6D020E96E09A06BD6D560 /* Constants.swift in Sources */,
+				465051063BE57E8581FC56AF /* ContentView.swift in Sources */,
+				9C2AE6619D7C5E5C2FE8A369 /* LineColors.swift in Sources */,
+				15F026E3FF655A3C681E8805 /* NYCTransitApp.swift in Sources */,
+				55D659531BA4D2D48957DF50 /* OnboardingSheet.swift in Sources */,
+				F106273B6DD8DD899553DD95 /* ProcessedTrain.swift in Sources */,
+				9F21B305009669B028CBC6DF /* SharedDefaults.swift in Sources */,
+				BCF1118DC0413D460C1AFC33 /* ThemePickerView.swift in Sources */,
+				C6B6B6BB6919B99BBFCD0632 /* TrainCircleView.swift in Sources */,
+				B0E8079B31DFC3BB5A5EABE5 /* TrainLine.swift in Sources */,
+				1F32BA45837A0B4EAC59107A /* TrainPickerView.swift in Sources */,
+				AF4CA5EEE12AFB4E20FD68C3 /* TransitService.swift in Sources */,
+				C286FDF63F95949289385DBD /* WidgetConfiguration.swift in Sources */,
+				80F901863C43FE0B8966A434 /* WidgetPreviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3A4D5DBAF9895D7F59CB947F /* PBXTargetDependency */ = {
+		DBF1A4F2BD14F4432FB25A7C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E809FB75762F3AC876B99711 /* StatusWidgetExtension */;
-			targetProxy = 7BDCF09D58ABCBF584D45926 /* PBXContainerItemProxy */;
+			target = E3DDC6E29A471FE698653AFC /* StatusWidgetExtension */;
+			targetProxy = EA4377039E67FB7007A91511 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		20A38357A8716C628FCDE0B8 /* Debug */ = {
+		0777057F69444C95CB8631B9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NYCTransit/NYCTransit.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = NYCTransit/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.johnrbell.NYCTransit;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3A4C00F3125B3F4B26F013DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -378,7 +395,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = C89K893TQH;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -407,30 +424,11 @@
 			};
 			name = Debug;
 		};
-		2AF3919A9D2945662A9AB190 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = NYCTransit/NYCTransit.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = NYCTransit/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.johnrbell.NYCTransit;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		60DEDB27E958A9A7277B9447 /* Release */ = {
+		80F9C47ADB4E55F893448C9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = StatusWidget/StatusWidget.entitlements;
-				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = StatusWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -441,9 +439,26 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
+			name = Debug;
+		};
+		939B352D4C7F381C90C7DAE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NYCTransit/NYCTransit.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = NYCTransit/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.johnrbell.NYCTransit;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
 			name = Release;
 		};
-		BCA204312F0000117FB5A661 /* Release */ = {
+		AAC5B0E06A1C28C1C8ABDD2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -478,7 +493,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = C89K893TQH;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -500,30 +515,11 @@
 			};
 			name = Release;
 		};
-		C1EF6DA39DBCAF2B62DFE73A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = NYCTransit/NYCTransit.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = NYCTransit/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.johnrbell.NYCTransit;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		C305CA40174A90C19B757E10 /* Debug */ = {
+		F36B3313F33DC1B18F6EE869 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = StatusWidget/StatusWidget.entitlements;
-				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = StatusWidget/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -534,39 +530,39 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0F5678F4855A9FF0E786F0BA /* Build configuration list for PBXProject "NYCTransit" */ = {
+		6D33B204406D82F646BFA914 /* Build configuration list for PBXProject "NYCTransit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				20A38357A8716C628FCDE0B8 /* Debug */,
-				BCA204312F0000117FB5A661 /* Release */,
+				3A4C00F3125B3F4B26F013DA /* Debug */,
+				AAC5B0E06A1C28C1C8ABDD2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		DDF5342C916830006B5DD979 /* Build configuration list for PBXNativeTarget "StatusWidgetExtension" */ = {
+		CAE26DF4851C93A018D9056A /* Build configuration list for PBXNativeTarget "StatusWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C305CA40174A90C19B757E10 /* Debug */,
-				60DEDB27E958A9A7277B9447 /* Release */,
+				80F9C47ADB4E55F893448C9E /* Debug */,
+				F36B3313F33DC1B18F6EE869 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		E4F9C88EC12483BCB062A8AF /* Build configuration list for PBXNativeTarget "NYCTransit" */ = {
+		D185C7FAA4D4651DD6502996 /* Build configuration list for PBXNativeTarget "NYCTransit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2AF3919A9D2945662A9AB190 /* Debug */,
-				C1EF6DA39DBCAF2B62DFE73A /* Release */,
+				0777057F69444C95CB8631B9 /* Debug */,
+				939B352D4C7F381C90C7DAE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 9CF5C9CBA1ED9CCC9AE8041C /* Project object */;
+	rootObject = B973FB91F9571F5704D2B32E /* Project object */;
 }
